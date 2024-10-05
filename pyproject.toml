@@ -3,7 +3,7 @@ name = "circlemind"
 version = "0.0.1"
 packages = [{ include = "circlemind" }]
 description = ""
-authors = ["circlemind.co <luca@circlemind.co>"]
+authors = ["Luca Pinchetti <luca@circlemind.co>"]
 repository = "https://github.com/circlemind-ai/circlemind-sdk"
 license = "Apache License 2.0"
 readme = "README.md"
