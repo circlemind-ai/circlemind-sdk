@@ -10,15 +10,11 @@ The interface is straightforward. Consider the following snippet:
 import circlemind
 
 API_KEY = "xxx"
-API_URL = "yyy"
 
-cm = circlemind.Circlemind(API_KEY, API_URL)
+TASK = "...task description goes here..."
+PROMPT = "...example queries go here..."
 
-# TODO: Set task prompt and example queries
-task = "...task description goes here..."
-example_queries = "...example queries go here..."
-
-cm.set_task(task, example_queries)
+cm = circlemind.Circlemind(API_KEY, TASK, PROMPT)
 
 # Add an artifact to memory
 artifact = "...artifact content here..."

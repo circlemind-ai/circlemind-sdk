@@ -9,11 +9,14 @@ class CirclemindError(Exception):
 
 # Circlemind API Client
 class Circlemind:
-    def __init__(self, api_key: str, base_url: str):
+    def __init__(self, api_key: str, prompt: str, example_queries: str, base_url: str = "http://api.circlemind.co"):
         self.api_key = api_key
+        self.prompt = prompt
+        self.example_queries = example_queries
         self.base_url = base_url
         self.headers = {'apiKey': self.api_key}
         logging.basicConfig(level=logging.INFO)
+        self._configure()
 
     def add_memory(self, memory: str, memory_id: str = None):
         """Add a new memory."""
@@ -32,6 +35,19 @@ class Circlemind:
         memories = self._wait_for_response(response)
         
         return memories[:max_items]
+    
+    def _configure(self, prompt: str, example_queries: str):
+        """Retrieve a list of memories based on a query."""
+        try:
+            url = f"{self.base_url}/configure"
+            payload = self._create_configure_payload(prompt=prompt, example_queries=example_queries)
+            self._send_post_request(url, payload)
+        except:
+            raise CirclemindError("Something went wrong during configuration.")
+    
+    def _create_configure_payload(self, prompt: str, example_queries: str):
+        """Create payload for querying memories."""
+        return {"domain": prompt, "exampleQueries": example_queries}
 
     def _create_memory_payload(self, memory: str, memory_id: str):
         """Create payload for adding memory."""
@@ -83,7 +99,7 @@ class Circlemind:
 
 
 if __name__ == '__main__':
-    cm = Circlemind("YOUR_API_KEY", "http://ec2-3-81-205-157.compute-1.amazonaws.com")
+    cm = Circlemind("YOUR_API_KEY")
 
     cm.get_memories("What animals do I like?")
 
