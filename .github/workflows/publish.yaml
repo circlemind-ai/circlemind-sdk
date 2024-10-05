@@ -12,7 +12,7 @@ jobs:
         runs-on: ubuntu-22.04
         environment:
           name: pypi
-          url: https://pypi.org/p/pcx
+          url: https://pypi.org/p/circlemind
         permissions:
           id-token: write 
         steps:
