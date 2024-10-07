@@ -10,19 +10,21 @@ The interface is straightforward. Consider the following snippet:
 import circlemind
 
 API_KEY = "xxx"
+cm = circlemind.Circlemind(API_KEY)
 
+# Optionally update the task prompt and queries associated with your API_KEY
 TASK = "...task description goes here..."
 PROMPT = "...example queries go here..."
+cm.configure(TASK, PROMPT)
 
-cm = circlemind.Circlemind(API_KEY, TASK, PROMPT)
 
 # Add an artifact to memory
 artifact = "...artifact content here..."
-cm.add_memory(artifact)
+cm.add(artifact)
 
 # Retrieve artifacts from memory given a query
 query = "...query to be answered here..."
-artifacts = cm.get_memories(query, max_items=25)
+artifacts = cm.query(query, max_items=25)
 
 for artifact in artifacts:
     print(artifact["content"])

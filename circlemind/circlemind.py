@@ -96,10 +96,3 @@ class Circlemind:
         except requests.HTTPError as e:
             logging.error(f"Failed to send GET request: {e}")
             raise CirclemindError(f"Error fetching memories: {str(e)}")
-
-
-if __name__ == '__main__':
-    cm = Circlemind("YOUR_API_KEY")
-
-    cm.get_memories("What animals do I like?")
-
