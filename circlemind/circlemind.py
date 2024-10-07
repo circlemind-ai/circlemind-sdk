@@ -26,7 +26,7 @@ class Circlemind:
     def configure(self,  prompt: str, example_queries: str):
         self._configure(prompt=prompt, example_queries=example_queries)
 
-    def query(self, query: str, max_items: int = 25):
+    def query(self, query: str):
         """Retrieve a list of memories based on a query."""
         url = f"{self.base_url}/reasoning"
         payload = self._create_query_payload(query)
@@ -34,7 +34,7 @@ class Circlemind:
         response = self._send_post_request(url, payload)
         memories = self._wait_for_response(response)
         
-        return memories[:max_items]
+        return memories
     
     def _configure(self, prompt: str, example_queries: str):
         """Retrieve a list of memories based on a query."""
@@ -82,7 +82,7 @@ class Circlemind:
         if status == "FAILED":
             raise CirclemindError("Fetching memories failed.")
 
-        return response.get("memories", [])
+        return response.get("memories", "")
 
     def _send_get_request(self, request_id: str, request_time: str):
         """Send a GET request to check the status of the processing."""
