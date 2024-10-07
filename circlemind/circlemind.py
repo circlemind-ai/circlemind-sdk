@@ -9,24 +9,24 @@ class CirclemindError(Exception):
 
 # Circlemind API Client
 class Circlemind:
-    def __init__(self, api_key: str, prompt: str, example_queries: str, base_url: str = "http://api.circlemind.co"):
+    def __init__(self, api_key: str, base_url: str = "http://api.circlemind.co"):
         self.api_key = api_key
-        self.prompt = prompt
-        self.example_queries = example_queries
         self.base_url = base_url
         self.headers = {'apiKey': self.api_key}
         logging.basicConfig(level=logging.INFO)
-        self._configure()
 
-    def add_memory(self, memory: str, memory_id: str = None):
+    def add(self, memory: str, memory_id: str = None):
         """Add a new memory."""
         url = f"{self.base_url}/memory"
         payload = self._create_memory_payload(memory, memory_id)
         
         response = self._send_post_request(url, payload)
         return response
+    
+    def configure(self,  prompt: str, example_queries: str):
+        self._configure(prompt=prompt, example_queries=example_queries)
 
-    def get_memories(self, query: str, max_items: int = 25):
+    def query(self, query: str, max_items: int = 25):
         """Retrieve a list of memories based on a query."""
         url = f"{self.base_url}/reasoning"
         payload = self._create_query_payload(query)
