@@ -1,4 +1,5 @@
 import requests
+from requests.adapters import HTTPAdapter, Retry
 import time
 import logging
 
@@ -9,11 +10,19 @@ class CirclemindError(Exception):
 
 # Circlemind API Client
 class Circlemind:
-    def __init__(self, api_key: str, base_url: str = "http://api.circlemind.co"):
+    REQUEST_RETRY_LIMIT = 5
+    REQUEST_RETRY_DELAY_SECONDS = 1
+    REQUEST_RETRY_DELAY__INCREMENT_SECONDS = 1
+
+    def __init__(self, api_key: str, base_url: str = "https://api.circlemind.co"):
         self.api_key = api_key
         self.base_url = base_url
         self.headers = {'apiKey': self.api_key}
         logging.basicConfig(level=logging.INFO)
+        
+        retry_config = Retry(total=self.REQUEST_RETRY_LIMIT, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504], raise_on_status=False)
+        self.request_session = requests.Session()
+        self.request_session.mount('https://', HTTPAdapter(max_retries=retry_config))
 
     def add(self, memory: str, memory_id: str = None):
         """Add a new memory."""
@@ -60,11 +69,11 @@ class Circlemind:
     def _send_post_request(self, url: str, payload: dict):
         """Send a POST request to the given URL with the provided payload."""
         try:
-            response = requests.post(url, json=payload, headers=self.headers)
-            response.raise_for_status()  # Raise an error for bad responses
+            response = self.request_session.post(url, json=payload, headers=self.headers)
             return response.json()
         except requests.HTTPError as e:
             logging.error(f"Failed to send POST request: {e}")
+            
             raise CirclemindError(f"Error adding memory: {str(e)}")
 
     def _wait_for_response(self, initial_response):
@@ -90,9 +99,9 @@ class Circlemind:
         params = {"requestId": request_id, "requestTime": request_time}
         
         try:
-            response = requests.get(url, params=params, headers=self.headers)
-            response.raise_for_status()
+            response = self.request_session.get(url, params=params, headers=self.headers)
             return response.json()
         except requests.HTTPError as e:
             logging.error(f"Failed to send GET request: {e}")
-            raise CirclemindError(f"Error fetching memories: {str(e)}")
+            
+            raise CirclemindError(f"Error adding memory: {str(e)}")
