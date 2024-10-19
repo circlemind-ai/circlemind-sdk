@@ -15,7 +15,6 @@ jobs:
   publish:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
     with:
-      publish_python: true
       target: circlemind
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
