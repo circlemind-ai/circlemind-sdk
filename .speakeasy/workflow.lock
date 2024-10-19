@@ -2,7 +2,7 @@ speakeasyVersion: 1.419.2
 sources:
     CirclemindSDK-OAS:
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:6865333bfc2d6393c9c6490c11f7ce98e3d9b7160a28c9aba4eabae6e76c0c91
+        sourceRevisionDigest: sha256:fe63ffc1b8e87e824480573cf56a5b08f430e76af1f05af8ad2992b78cc683c9
         sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
         tags:
             - latest
@@ -10,10 +10,11 @@ targets:
     circlemind-sdk:
         source: CirclemindSDK-OAS
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:6865333bfc2d6393c9c6490c11f7ce98e3d9b7160a28c9aba4eabae6e76c0c91
+        sourceRevisionDigest: sha256:fe63ffc1b8e87e824480573cf56a5b08f430e76af1f05af8ad2992b78cc683c9
         sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
 workflow:
     workflowVersion: 1.0.0
+    speakeasyVersion: latest
     sources:
         CirclemindSDK-OAS:
             inputs:
@@ -24,3 +25,6 @@ workflow:
         circlemind-sdk:
             target: python
             source: CirclemindSDK-OAS
+            publish:
+                pypi:
+                    token: $pypi_token

@@ -1,5 +1,5 @@
 lockVersion: 2.0.0
-id: a0801877-37ae-4462-9c89-1c62bbef0f53
+id: 2e95d224-e04d-466d-96a9-3383429c763f
 management:
   docChecksum: a3bc8f553c127b604e71f95165444f3f
   docVersion: 0.1.0
@@ -7,6 +7,7 @@ management:
   generationVersion: 2.438.15
   releaseVersion: 0.0.1
   configChecksum: 8ed944b97299fc96d8d62bf3d8aaf4ce
+  published: true
 features:
   python:
     additionalDependencies: 1.0.0
@@ -34,7 +35,6 @@ generatedFiles:
   - .gitattributes
   - .python-version
   - .vscode/settings.json
-  - CONTRIBUTING.md
   - USAGE.md
   - docs/models/configurerequest.md
   - docs/models/configureresponse.md
