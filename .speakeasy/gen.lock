@@ -7,6 +7,7 @@ management:
   generationVersion: 2.438.15
   releaseVersion: 0.0.1
   configChecksum: cf7c9dc9f46f5eab9f8e6f3544476117
+  published: true
 features:
   python:
     additionalDependencies: 1.0.0

@@ -5,6 +5,7 @@ targets:
         source: -OAS
 workflow:
     workflowVersion: 1.0.0
+    speakeasyVersion: latest
     sources:
         -OAS:
             inputs:
@@ -15,3 +16,6 @@ workflow:
         circlemind:
             target: python
             source: -OAS
+            publish:
+                pypi:
+                    token: $pypi_token
