@@ -1,0 +1,181 @@
+lockVersion: 2.0.0
+id: a0801877-37ae-4462-9c89-1c62bbef0f53
+management:
+  docChecksum: a3bc8f553c127b604e71f95165444f3f
+  docVersion: 0.1.0
+  speakeasyVersion: 1.419.2
+  generationVersion: 2.438.15
+  releaseVersion: 0.0.1
+  configChecksum: 8ed944b97299fc96d8d62bf3d8aaf4ce
+features:
+  python:
+    additionalDependencies: 1.0.0
+    core: 5.6.0
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    envVarSecurityUsage: 0.3.1
+    flattening: 3.1.0
+    globalSecurity: 3.0.2
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.0.0
+    ignores: 3.0.0
+    methodArguments: 1.0.2
+    nameOverrides: 3.0.0
+    nullables: 1.0.0
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.0.0
+    unions: 3.0.2
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .python-version
+  - .vscode/settings.json
+  - CONTRIBUTING.md
+  - USAGE.md
+  - docs/models/configurerequest.md
+  - docs/models/configureresponse.md
+  - docs/models/creategraphgraphgraphidpostrequest.md
+  - docs/models/getgraphconfigurationgraphgraphidconfigurationgetrequest.md
+  - docs/models/getreasoninghandlergraphgraphidreasoningrequestidgetrequest.md
+  - docs/models/httpvalidationerror.md
+  - docs/models/loc.md
+  - docs/models/memoryrequest.md
+  - docs/models/memoryresponse.md
+  - docs/models/postgraphconfigurationgraphgraphidconfigurationpostrequest.md
+  - docs/models/postmemorygraphgraphidmemorypostrequest.md
+  - docs/models/postreasoninggraphgraphidreasoningpostrequest.md
+  - docs/models/reasoningrequest.md
+  - docs/models/reasoningresponse.md
+  - docs/models/reasoningstatusresponse.md
+  - docs/models/security.md
+  - docs/models/utils/retryconfig.md
+  - docs/models/validationerror.md
+  - docs/sdks/circlemindsdk/README.md
+  - poetry.toml
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/compile.sh
+  - scripts/prepare-readme.py
+  - scripts/publish.sh
+  - src/circlemind_sdk/__init__.py
+  - src/circlemind_sdk/_hooks/__init__.py
+  - src/circlemind_sdk/_hooks/sdkhooks.py
+  - src/circlemind_sdk/_hooks/types.py
+  - src/circlemind_sdk/_version.py
+  - src/circlemind_sdk/basesdk.py
+  - src/circlemind_sdk/httpclient.py
+  - src/circlemind_sdk/models/__init__.py
+  - src/circlemind_sdk/models/configurerequest.py
+  - src/circlemind_sdk/models/configureresponse.py
+  - src/circlemind_sdk/models/create_graph_graph_graph_id_postop.py
+  - src/circlemind_sdk/models/get_graph_configuration_graph_graph_id_configuration_getop.py
+  - src/circlemind_sdk/models/get_reasoning_handler_graph_graph_id_reasoning_request_id_getop.py
+  - src/circlemind_sdk/models/httpvalidationerror.py
+  - src/circlemind_sdk/models/memoryrequest.py
+  - src/circlemind_sdk/models/memoryresponse.py
+  - src/circlemind_sdk/models/post_graph_configuration_graph_graph_id_configuration_postop.py
+  - src/circlemind_sdk/models/post_memory_graph_graph_id_memory_postop.py
+  - src/circlemind_sdk/models/post_reasoning_graph_graph_id_reasoning_postop.py
+  - src/circlemind_sdk/models/reasoningrequest.py
+  - src/circlemind_sdk/models/reasoningresponse.py
+  - src/circlemind_sdk/models/reasoningstatusresponse.py
+  - src/circlemind_sdk/models/sdkerror.py
+  - src/circlemind_sdk/models/security.py
+  - src/circlemind_sdk/models/validationerror.py
+  - src/circlemind_sdk/py.typed
+  - src/circlemind_sdk/sdk.py
+  - src/circlemind_sdk/sdkconfiguration.py
+  - src/circlemind_sdk/types/__init__.py
+  - src/circlemind_sdk/types/basemodel.py
+  - src/circlemind_sdk/utils/__init__.py
+  - src/circlemind_sdk/utils/annotations.py
+  - src/circlemind_sdk/utils/enums.py
+  - src/circlemind_sdk/utils/eventstreaming.py
+  - src/circlemind_sdk/utils/forms.py
+  - src/circlemind_sdk/utils/headers.py
+  - src/circlemind_sdk/utils/logger.py
+  - src/circlemind_sdk/utils/metadata.py
+  - src/circlemind_sdk/utils/queryparams.py
+  - src/circlemind_sdk/utils/requestbodies.py
+  - src/circlemind_sdk/utils/retries.py
+  - src/circlemind_sdk/utils/security.py
+  - src/circlemind_sdk/utils/serializers.py
+  - src/circlemind_sdk/utils/url.py
+  - src/circlemind_sdk/utils/values.py
+examples:
+  get_graph_configuration_graph__graph_id__configuration_get:
+    speakeasy-default-get-graph-configuration-graph-graph-id-configuration-get:
+      parameters:
+        path:
+          graph_id: "<id>"
+      responses:
+        "200":
+          application/json: {"domain": "rare-fog.net", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>", "<value>"]}
+        "422": {}
+  post_graph_configuration_graph__graph_id__configuration_post:
+    speakeasy-default-post-graph-configuration-graph-graph-id-configuration-post:
+      parameters:
+        path:
+          graph_id: "<id>"
+      requestBody:
+        application/json: {"domain": "ambitious-ceramics.com", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>", "<value>"]}
+      responses:
+        "200":
+          application/json: {"domain": "lost-cinder.biz", "exampleQueries": "<value>", "entityTypes": ["<value>"]}
+        "422": {}
+  get_graph_list_graph_get:
+    speakeasy-default-get-graph-list-graph-get:
+      responses:
+        "200":
+          application/json: "<value>"
+        "422": {}
+  create_graph_graph__graph_id__post:
+    speakeasy-default-create-graph-graph-graph-id-post:
+      parameters:
+        path:
+          graph_id: "<id>"
+      requestBody:
+        application/json: {"domain": "liquid-godfather.org", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>", "<value>"]}
+      responses:
+        "200":
+          application/json: "<value>"
+        "422": {}
+  post_reasoning_graph__graph_id__reasoning_post:
+    speakeasy-default-post-reasoning-graph-graph-id-reasoning-post:
+      parameters:
+        path:
+          graph_id: "<id>"
+      requestBody:
+        application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {"requestId": "<id>", "requestTime": 764604}
+        "422": {}
+  get_reasoning_handler_graph__graph_id__reasoning__request_id__get:
+    speakeasy-default-get-reasoning-handler-graph-graph-id-reasoning-request-id-get:
+      parameters:
+        path:
+          graph_id: "<id>"
+          request_id: "<id>"
+        query:
+          requestTime: 982149
+      responses:
+        "200":
+          application/json: {"status": "<value>", "memories": "<value>", "context": "<value>"}
+        "422": {}
+  post_memory_graph__graph_id__memory_post:
+    speakeasy-default-post-memory-graph-graph-id-memory-post:
+      parameters:
+        path:
+          graph_id: "<id>"
+      requestBody:
+        application/json: {"memory": "<value>"}
+      responses:
+        "200":
+          application/json: {"memoryId": "<id>", "requestId": "<id>"}
+        "422": {}

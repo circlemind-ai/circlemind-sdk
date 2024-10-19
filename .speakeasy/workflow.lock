@@ -1,0 +1,26 @@
+speakeasyVersion: 1.419.2
+sources:
+    CirclemindSDK-OAS:
+        sourceNamespace: circlemind-sdk-oas
+        sourceRevisionDigest: sha256:6865333bfc2d6393c9c6490c11f7ce98e3d9b7160a28c9aba4eabae6e76c0c91
+        sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
+        tags:
+            - latest
+targets:
+    circlemind-sdk:
+        source: CirclemindSDK-OAS
+        sourceNamespace: circlemind-sdk-oas
+        sourceRevisionDigest: sha256:6865333bfc2d6393c9c6490c11f7ce98e3d9b7160a28c9aba4eabae6e76c0c91
+        sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
+workflow:
+    workflowVersion: 1.0.0
+    sources:
+        CirclemindSDK-OAS:
+            inputs:
+                - location: ../sdk/openapi.json
+            registry:
+                location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas
+    targets:
+        circlemind-sdk:
+            target: python
+            source: CirclemindSDK-OAS
