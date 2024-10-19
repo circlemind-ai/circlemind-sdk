@@ -1,0 +1,14 @@
+workflowVersion: 1.0.0
+sources:
+    -OAS:
+        inputs:
+            - location: ../sdk/openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/circlemind/circlemind/-oas
+targets:
+    circlemind:
+        target: python
+        source: -OAS
+        publish:
+            pypi:
+                token: $pypi_token
