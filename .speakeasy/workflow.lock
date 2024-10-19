@@ -2,7 +2,7 @@ speakeasyVersion: 1.419.2
 sources:
     CirclemindSDK-OAS:
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:fe63ffc1b8e87e824480573cf56a5b08f430e76af1f05af8ad2992b78cc683c9
+        sourceRevisionDigest: sha256:02babfea71aa72c29559c9870f9c303ab02cbec7b35867b6437725cdf0cb34ba
         sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
         tags:
             - latest
@@ -10,7 +10,7 @@ targets:
     circlemind-sdk:
         source: CirclemindSDK-OAS
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:fe63ffc1b8e87e824480573cf56a5b08f430e76af1f05af8ad2992b78cc683c9
+        sourceRevisionDigest: sha256:02babfea71aa72c29559c9870f9c303ab02cbec7b35867b6437725cdf0cb34ba
         sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
 workflow:
     workflowVersion: 1.0.0
