@@ -13,9 +13,9 @@ generation:
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
   auth:
-    oAuth2ClientCredentialsEnabled: true
+    oAuth2ClientCredentialsEnabled: false
 python:
-  version: 0.0.3
+  version: 0.0.4
   additionalDependencies:
     dev: {}
     main: {}
