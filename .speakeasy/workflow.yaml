@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     CirclemindSDK-OAS:
         inputs:
-            - location: ../sdk/openapi.json
+            - location: ./sdk/openapi.json
         registry:
             location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas
 targets:
