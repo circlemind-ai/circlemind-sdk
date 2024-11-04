@@ -16,6 +16,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class MemoryRequestTypedDict(TypedDict):
     memory: str
     memory_id: NotRequired[Nullable[str]]
+    metadata: NotRequired[Nullable[str]]
 
 
 class MemoryRequest(BaseModel):
@@ -24,11 +25,15 @@ class MemoryRequest(BaseModel):
     memory_id: Annotated[OptionalNullable[str], pydantic.Field(alias="memoryId")] = (
         UNSET
     )
+    
+    metadata: Annotated[OptionalNullable[str], pydantic.Field(alias="metadata")] = (
+        UNSET
+    )
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["memoryId"]
-        nullable_fields = ["memoryId"]
+        optional_fields = ["memoryId", "metadata"]
+        nullable_fields = ["memoryId", "metadata"]
         null_default_fields = []
 
         serialized = handler(self)
