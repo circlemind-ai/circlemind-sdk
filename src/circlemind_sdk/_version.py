@@ -3,7 +3,7 @@
 import importlib.metadata
 
 __title__: str = "circlemind-sdk"
-__version__: str = "0.0.4"
+__version__: str = "0.1.0"
 
 try:
     if __package__ is not None:

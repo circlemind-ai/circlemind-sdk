@@ -79,7 +79,7 @@ s = CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
 )
 
-res = s.get_configuration(graph_id="<id>")
+res = s.get_graph_configuration(graph_name="<value>")
 
 if res is not None:
     # handle response
@@ -99,7 +99,7 @@ async def main():
     s = CirclemindSDK(
         api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
     )
-    res = await s.get_configuration_async(graph_id="<id>")
+    res = await s.get_graph_configuration_async(graph_name="<value>")
     if res is not None:
         # handle response
         pass
@@ -116,13 +116,15 @@ asyncio.run(main())
 
 ### [CirclemindSDK](docs/sdks/circlemindsdk/README.md)
 
-* [get_configuration](docs/sdks/circlemindsdk/README.md#get_configuration) - Get Graph Configuration
-* [configure](docs/sdks/circlemindsdk/README.md#configure) - Change Graph Configuration
-* [list_graphs](docs/sdks/circlemindsdk/README.md#list_graphs) - List Graphs
+* [get_graph_configuration](docs/sdks/circlemindsdk/README.md#get_graph_configuration) - Get Graph Configuration
+* [create_graph_configuration](docs/sdks/circlemindsdk/README.md#create_graph_configuration) - Post Graph Configuration
+* [get_graph_list](docs/sdks/circlemindsdk/README.md#get_graph_list) - Get Graph List
 * [create_graph](docs/sdks/circlemindsdk/README.md#create_graph) - Create Graph
-* [query](docs/sdks/circlemindsdk/README.md#query) - Start Reasoning
-* [get_reasoning](docs/sdks/circlemindsdk/README.md#get_reasoning) - Get Reasoning
-* [add](docs/sdks/circlemindsdk/README.md#add) - Post Memory
+* [create_query](docs/sdks/circlemindsdk/README.md#create_query) - Post Query
+* [get_query_handler](docs/sdks/circlemindsdk/README.md#get_query_handler) - Get Query Handler
+* [create_insert](docs/sdks/circlemindsdk/README.md#create_insert) - Post Insert
+* [create_graph_files](docs/sdks/circlemindsdk/README.md#create_graph_files) - Add Files
+* [get_insert_handler](docs/sdks/circlemindsdk/README.md#get_insert_handler) - Get Insert Handler
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -142,7 +144,7 @@ s = CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
 )
 
-res = s.get_configuration(graph_id="<id>",
+res = s.get_graph_configuration(graph_name="<value>",
     RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
 if res is not None:
@@ -162,7 +164,7 @@ s = CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
 )
 
-res = s.get_configuration(graph_id="<id>")
+res = s.get_graph_configuration(graph_name="<value>")
 
 if res is not None:
     # handle response
@@ -185,12 +187,12 @@ By default, an API error will raise a models.SDKError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `get_configuration_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `get_graph_configuration_async` method may raise the following exceptions:
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.HTTPValidationError | 422                        | application/json           |
-| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type                 | Status Code | Content Type     |
+| -------------------------- | ----------- | ---------------- |
+| models.HTTPValidationError | 422         | application/json |
+| models.SDKError            | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -204,7 +206,7 @@ s = CirclemindSDK(
 
 res = None
 try:
-    res = s.get_configuration(graph_id="<id>")
+    res = s.get_graph_configuration(graph_name="<value>")
 
     if res is not None:
         # handle response
@@ -222,34 +224,6 @@ except models.SDKError as e:
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
-
-You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://api.circlemind.co` | None |
-
-#### Example
-
-```python
-from circlemind_sdk import CirclemindSDK
-import os
-
-s = CirclemindSDK(
-    server_idx=0,
-    api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
-
-res = s.get_configuration(graph_id="<id>")
-
-if res is not None:
-    # handle response
-    pass
-
-```
-
-
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
@@ -262,7 +236,7 @@ s = CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
 )
 
-res = s.get_configuration(graph_id="<id>")
+res = s.get_graph_configuration(graph_name="<value>")
 
 if res is not None:
     # handle response
@@ -359,9 +333,9 @@ s = CirclemindSDK(async_client=CustomClient(httpx.AsyncClient()))
 
 This SDK supports the following security scheme globally:
 
-| Name                           | Type                           | Scheme                         | Environment Variable           |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `api_key_header`               | apiKey                         | API key                        | `CIRCLEMINDSDK_API_KEY_HEADER` |
+| Name             | Type   | Scheme  | Environment Variable           |
+| ---------------- | ------ | ------- | ------------------------------ |
+| `api_key_header` | apiKey | API key | `CIRCLEMINDSDK_API_KEY_HEADER` |
 
 To authenticate with the API the `api_key_header` parameter must be set when initializing the SDK client instance. For example:
 ```python
@@ -372,7 +346,7 @@ s = CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
 )
 
-res = s.get_configuration(graph_id="<id>")
+res = s.get_graph_configuration(graph_name="<value>")
 
 if res is not None:
     # handle response
