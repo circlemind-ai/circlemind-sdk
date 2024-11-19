@@ -13,3 +13,7 @@ targets:
         publish:
             pypi:
                 token: $pypi_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas-code-samples
+            blocking: false

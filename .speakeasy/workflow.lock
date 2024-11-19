@@ -1,17 +1,20 @@
-speakeasyVersion: 1.419.2
+speakeasyVersion: 1.425.1
 sources:
     CirclemindSDK-OAS:
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:296649bddeede31bc7f9a291a37f9a3b61705e562e473c5391ebb4102b5a2345
-        sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
+        sourceRevisionDigest: sha256:a3d214430fa6524b938a54861f654a11112b10033815d91f99ee112893513517
+        sourceBlobDigest: sha256:3935763e243b71cb4e2ef0f7c29c085919d664aa0758e86bed192f4759529cee
         tags:
             - latest
+            - main
 targets:
     circlemind-sdk:
         source: CirclemindSDK-OAS
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:296649bddeede31bc7f9a291a37f9a3b61705e562e473c5391ebb4102b5a2345
-        sourceBlobDigest: sha256:e8d5a6e7f234eb8650384f00d1b18aa7a02af18b48e620087d1cb4210ab45ecc
+        sourceRevisionDigest: sha256:a3d214430fa6524b938a54861f654a11112b10033815d91f99ee112893513517
+        sourceBlobDigest: sha256:3935763e243b71cb4e2ef0f7c29c085919d664aa0758e86bed192f4759529cee
+        codeSamplesNamespace: circlemind-sdk-oas-code-samples
+        codeSamplesRevisionDigest: sha256:253be3ea6bd2840364e76525a564a31afb31293f4fedc6948e7d10e837865d58
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -28,3 +31,7 @@ workflow:
             publish:
                 pypi:
                     token: $pypi_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas-code-samples
+                blocking: false
