@@ -1,704 +1,77 @@
 {
-    "openapi": "3.1.0",
-    "info": {
-      "title": "CirclemindAPI",
-      "version": "0.1.0"
-    },
-    "servers": [
-        { "url": "https://api.circlemind.co" }
-    ],
-    "x-speakeasy-retries": {
-        "strategy": "backoff",
-        "backoff": {
-        "initialInterval": 500,
-        "maxInterval": 60000,
-        "maxElapsedTime": 3600000,
-        "exponent": 1.5
-        },
-        "statusCodes": [
-            "5XX"
-        ],
-        "retryConnectionErrors": true
-    },
-    "paths": {
-      "/user": {
-        "get": {
-          "x-speakeasy-ignore": true,
-          "summary": "Registered",
-          "operationId": "registered_user_get",
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-  
-                  }
-                }
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CirclemindAPI",
+    "version": "0.3.0"
+  },
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "Registered",
+        "operationId": "registered_user_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
         },
-        "post": {
-          "x-speakeasy-ignore": true,
-          "summary": "Register",
-          "operationId": "register_user_post",
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-  
-                  }
-                }
-              }
-            }
-          }
-        }
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "get_user"
       },
-      "/user/demo_api_key": {
-        "post": {
-          "x-speakeasy-ignore": true,
-          "summary": "Register With Demo Api Key",
-          "operationId": "register_with_demo_api_key_user_demo_api_key_post",
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-  
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/graph/{graph_id}/configuration": {
-        "get": {
-          "summary": "Get Graph Configuration",
-          "operationId": "get_graph_configuration_graph__graph_id__configuration_get",
-          "x-speakeasy-name-override": "get_configuration",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfigureResponse"
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
+      "post": {
+        "summary": "Register",
+        "operationId": "register_user_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
         },
-        "post": {
-          "summary": "Change Graph Configuration",
-          "operationId": "post_graph_configuration_graph__graph_id__configuration_post",
-          "x-speakeasy-name-override": "configure",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            },
-            {
-              "x-speakeasy-ignore": true,
-              "name": "increment_usage",
-              "in": "query",
-              "required": false,
-              "schema": {
-                "type": "boolean",
-                "default": false,
-                "title": "Increment Usage"
-              }
-            },
-            {
-              "x-speakeasy-ignore": true,
-              "name": "demo_allowed",
-              "in": "query",
-              "required": false,
-              "schema": {
-                "type": "boolean",
-                "default": false,
-                "title": "Demo Allowed"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ConfigureRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ConfigureResponse"
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/graph": {
-        "get": {
-          "summary": "List Graphs",
-          "operationId": "get_graph_list_graph_get",
-          "x-speakeasy-name-override": "list_graphs",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "x-speakeasy-ignore": true,
-              "name": "graph_id",
-              "in": "query",
-              "required": false,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-  
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/graph/{graph_id}": {
-        "post": {
-          "summary": "Create Graph",
-          "operationId": "create_graph_graph__graph_id__post",
-          "x-speakeasy-name-override": "create_graph",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            },
-            {
-              "x-speakeasy-ignore": true,
-              "name": "increment_usage",
-              "in": "query",
-              "required": false,
-              "schema": {
-                "type": "boolean",
-                "default": false,
-                "title": "Increment Usage"
-              }
-            },
-            {
-              "x-speakeasy-ignore": true,
-              "name": "demo_allowed",
-              "in": "query",
-              "required": false,
-              "schema": {
-                "type": "boolean",
-                "default": false,
-                "title": "Demo Allowed"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ConfigureRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-  
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "get": {
-          "summary": "Get Graph",
-          "x-speakeasy-ignore": true,
-          "operationId": "get_graph_graph__graph_id__get",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/DownloadGraphResponse"
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/graph/{graph_id}/stats": {
-        "get": {
-          "summary": "Get Graph Stats",
-          "x-speakeasy-ignore": true,
-          "operationId": "get_stats_graph__graph_id__stats_get",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/GraphStatsResponse"
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/graph/{graph_id}/reasoning": {
-        "post": {
-          "summary": "Start Reasoning",
-          "operationId": "post_reasoning_graph__graph_id__reasoning_post",
-          "x-speakeasy-name-override": "query",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReasoningRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ReasoningResponse"
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/graph/{graph_id}/reasoning/{request_id}": {
-        "get": {
-          "summary": "Get Reasoning",
-          "operationId": "get_reasoning_handler_graph__graph_id__reasoning__request_id__get",
-          "x-speakeasy-name-override": "get_reasoning",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            },
-            {
-              "name": "request_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Request Id"
-              }
-            },
-            {
-              "name": "requestTime",
-              "in": "query",
-              "required": true,
-              "schema": {
-                "type": "integer",
-                "title": "Requesttime"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ReasoningStatusResponse"
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/graph/{graph_id}/memory": {
-        "post": {
-          "summary": "Post Memory",
-          "operationId": "post_memory_graph__graph_id__memory_post",
-          "x-speakeasy-name-override": "add",
-          "security": [
-            {
-              "APIKeyHeader": []
-            }
-          ],
-          "parameters": [
-            {
-              "name": "graph_id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "title": "Graph Id"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MemoryRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/MemoryResponse"
-                  }
-                }
-              }
-            },
-            "422": {
-              "description": "Validation Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/HTTPValidationError"
-                  }
-                }
-              }
-            }
-          }
-        }
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "create_user"
       }
     },
-    "components": {
-      "schemas": {
-        "ConfigureRequest": {
-          "properties": {
-            "domain": {
-              "type": "string",
-              "title": "Domain"
-            },
-            "exampleQueries": {
-              "type": "string",
-              "title": "Examplequeries"
-            },
-            "entityTypes": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array",
-              "title": "Entitytypes"
+    "/user/demo_api_key": {
+      "post": {
+        "summary": "Register With Demo Api Key",
+        "operationId": "register_with_demo_api_key_user_demo_api_key_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
             }
-          },
-          "type": "object",
-          "required": [
-            "domain",
-            "exampleQueries",
-            "entityTypes"
-          ],
-          "title": "ConfigureRequest"
+          }
         },
-        "ConfigureResponse": {
-          "properties": {
-            "domain": {
-              "type": "string",
-              "title": "Domain"
-            },
-            "exampleQueries": {
-              "type": "string",
-              "title": "Examplequeries"
-            },
-            "entityTypes": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array",
-              "title": "Entitytypes"
-            }
-          },
-          "type": "object",
-          "required": [
-            "domain",
-            "exampleQueries",
-            "entityTypes"
-          ],
-          "title": "ConfigureResponse"
-        },
-        "DownloadGraphResponse": {
-          "properties": {
-            "presignedUrl": {
-              "type": "string",
-              "title": "Presignedurl"
-            }
-          },
-          "type": "object",
-          "required": [
-            "presignedUrl"
-          ],
-          "title": "DownloadGraphResponse"
-        },
-        "GraphStatsResponse": {
-          "properties": {
-            "chunks": {
-              "type": "integer",
-              "title": "Chunks"
-            },
-            "entities": {
-              "type": "integer",
-              "title": "Entities"
-            },
-            "triples": {
-              "type": "integer",
-              "title": "Triples"
-            },
-            "recentQueries": {
-              "items": {
-                "$ref": "#/components/schemas/Query"
-              },
-              "type": "array",
-              "title": "Recentqueries"
-            }
-          },
-          "type": "object",
-          "required": [
-            "chunks",
-            "entities",
-            "triples",
-            "recentQueries"
-          ],
-          "title": "GraphStatsResponse"
-        },
-        "HTTPValidationError": {
-          "properties": {
-            "detail": {
-              "items": {
-                "$ref": "#/components/schemas/ValidationError"
-              },
-              "type": "array",
-              "title": "Detail"
-            }
-          },
-          "type": "object",
-          "title": "HTTPValidationError"
-        },
-        "MemoryRequest": {
-          "properties": {
-            "memory": {
-              "type": "string",
-              "title": "Memory"
-            },
-            "memoryId": {
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "create_user/demo_api_key"
+      }
+    },
+    "/graph/{graph_name}/configuration": {
+      "get": {
+        "summary": "Get Graph Configuration",
+        "operationId": "get_graph_configuration_graph__graph_name__configuration_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
               "anyOf": [
                 {
                   "type": "string"
@@ -707,9 +80,81 @@
                   "type": "null"
                 }
               ],
-              "title": "Memoryid"
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
             },
-            "metadata": {
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfigureResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "get_graph_configuration"
+      },
+      "post": {
+        "summary": "Post Graph Configuration",
+        "operationId": "post_graph_configuration_graph__graph_name__configuration_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
               "anyOf": [
                 {
                   "type": "string"
@@ -718,73 +163,93 @@
                   "type": "null"
                 }
               ],
-              "title": "Metadata"
+              "title": "Graph Name"
             }
           },
-          "type": "object",
-          "required": [
-            "memory"
-          ],
-          "title": "MemoryRequest"
-        },
-        "MemoryResponse": {
-          "properties": {
-            "memoryId": {
-              "type": "string",
-              "title": "Memoryid"
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
             },
-            "requestId": {
-              "type": "string",
-              "title": "Requestid"
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfigureResponse"
+                }
+              }
             }
           },
-          "type": "object",
-          "required": [
-            "memoryId",
-            "requestId"
-          ],
-          "title": "MemoryResponse"
-        },
-        "Query": {
-          "properties": {
-            "id": {
-              "type": "string",
-              "title": "Id"
-            },
-            "query": {
-              "type": "string",
-              "title": "Query"
-            },
-            "memories": {
-              "type": "string",
-              "title": "Memories"
-            },
-            "timestamp": {
-              "type": "string",
-              "title": "Timestamp"
-            },
-            "confidence": {
-              "type": "string",
-              "title": "Confidence"
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
             }
-          },
-          "type": "object",
-          "required": [
-            "id",
-            "query",
-            "memories",
-            "timestamp",
-            "confidence"
-          ],
-          "title": "Query"
+          }
         },
-        "ReasoningRequest": {
-          "properties": {
-            "query": {
-              "type": "string",
-              "title": "Query"
-            },
-            "parameters": {
+        "x-speakeasy-name-override": "create_graph_configuration"
+      }
+    },
+    "/graph": {
+      "get": {
+        "summary": "Get Graph List",
+        "operationId": "get_graph_list_graph_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
               "anyOf": [
                 {
                   "type": "string"
@@ -793,96 +258,1200 @@
                   "type": "null"
                 }
               ],
-              "title": "Parameters"
+              "title": "Graph Name"
             }
           },
-          "type": "object",
-          "required": [
-            "query"
-          ],
-          "title": "ReasoningRequest"
-        },
-        "ReasoningResponse": {
-          "properties": {
-            "requestId": {
-              "type": "string",
-              "title": "Requestid"
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
             },
-            "requestTime": {
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "get_graph_list"
+      }
+    },
+    "/graph/{graph_name}": {
+      "post": {
+        "summary": "Create Graph",
+        "operationId": "create_graph_graph__graph_name__post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "create_graph"
+      },
+      "get": {
+        "summary": "Get Graph Resource",
+        "operationId": "get_graph_resource_graph__graph_name__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadGraphResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "get_graph_resource"
+      }
+    },
+    "/graph/{graph_name}/stats": {
+      "get": {
+        "summary": "Get Stats",
+        "operationId": "get_stats_graph__graph_name__stats_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GraphStatsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "get_stats"
+      }
+    },
+    "/graph/{graph_name}/query": {
+      "post": {
+        "summary": "Post Query",
+        "operationId": "post_query_graph__graph_name__query_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Increment Usage"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "create_query"
+      }
+    },
+    "/graph/{graph_name}/query/{request_id}": {
+      "get": {
+        "summary": "Get Query Handler",
+        "operationId": "get_query_handler_graph__graph_name__query__request_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Request Id"
+            }
+          },
+          {
+            "name": "requestTime",
+            "in": "query",
+            "required": true,
+            "schema": {
               "type": "integer",
               "title": "Requesttime"
             }
           },
-          "type": "object",
-          "required": [
-            "requestId",
-            "requestTime"
-          ],
-          "title": "ReasoningResponse"
-        },
-        "ReasoningStatusResponse": {
-          "properties": {
-            "status": {
-              "type": "string",
-              "title": "Status"
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
             },
-            "memories": {
-              "type": "string",
-              "title": "Memories"
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Demo Allowed"
             },
-            "context": {
-              "type": "string",
-              "title": "Context"
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestStatus"
+                }
+              }
             }
           },
-          "type": "object",
-          "required": [
-            "status",
-            "memories",
-            "context"
-          ],
-          "title": "ReasoningStatusResponse"
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
         },
-        "ValidationError": {
-          "properties": {
-            "loc": {
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "integer"
-                  }
-                ]
-              },
-              "type": "array",
-              "title": "Location"
-            },
-            "msg": {
-              "type": "string",
-              "title": "Message"
-            },
-            "type": {
-              "type": "string",
-              "title": "Error Type"
+        "x-speakeasy-name-override": "get_query_handler"
+      }
+    },
+    "/graph/{graph_name}/insert": {
+      "post": {
+        "summary": "Post Insert",
+        "operationId": "post_insert_graph__graph_name__insert_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
             }
           },
-          "type": "object",
-          "required": [
-            "loc",
-            "msg",
-            "type"
-          ],
-          "title": "ValidationError"
-        }
-      },
-      "securitySchemes": {
-        "APIKeyHeader": {
-          "type": "apiKey",
-          "in": "header",
-          "name": "apiKey"
-        }
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Increment Usage"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemoryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsertResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "create_insert"
+      }
+    },
+    "/graph/{graph_name}/files": {
+      "post": {
+        "summary": "Add Files",
+        "operationId": "add_files_graph__graph_name__files_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Increment Usage"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_add_files_graph__graph_name__files_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "create_graph_files"
+      }
+    },
+    "/graph/{graph_name}/insert/{request_id}": {
+      "get": {
+        "summary": "Get Insert Handler",
+        "operationId": "get_insert_handler_graph__graph_name__insert__request_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "graph_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Graph Name"
+            }
+          },
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Request Id"
+            }
+          },
+          {
+            "name": "requestTime",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Requesttime"
+            }
+          },
+          {
+            "name": "increment_usage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Increment Usage"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "demo_allowed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Demo Allowed"
+            },
+            "x-speakeasy-ignore": true
+          },
+          {
+            "name": "validate_graph_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Validate Graph Name"
+            },
+            "x-speakeasy-ignore": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestStatus"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "get_insert_handler"
+      }
+    },
+    "/get_api_key/{input_key}": {
+      "get": {
+        "summary": "Get Api Key",
+        "operationId": "get_api_key_get_api_key__input_key__get",
+        "parameters": [
+          {
+            "name": "input_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Input Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "get_api_key"
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "Body_add_files_graph__graph_name__files_post": {
+        "properties": {
+          "files": {
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "type": "array",
+            "title": "Files"
+          }
+        },
+        "type": "object",
+        "required": [
+          "files"
+        ],
+        "title": "Body_add_files_graph__graph_name__files_post"
+      },
+      "ConfigureRequest": {
+        "properties": {
+          "domain": {
+            "type": "string",
+            "title": "Domain"
+          },
+          "exampleQueries": {
+            "type": "string",
+            "title": "Examplequeries"
+          },
+          "entityTypes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Entitytypes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "domain",
+          "exampleQueries",
+          "entityTypes"
+        ],
+        "title": "ConfigureRequest"
+      },
+      "ConfigureResponse": {
+        "properties": {
+          "domain": {
+            "type": "string",
+            "title": "Domain"
+          },
+          "exampleQueries": {
+            "type": "string",
+            "title": "Examplequeries"
+          },
+          "entityTypes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Entitytypes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "domain",
+          "exampleQueries",
+          "entityTypes"
+        ],
+        "title": "ConfigureResponse"
+      },
+      "DownloadGraphResponse": {
+        "properties": {
+          "presignedUrl": {
+            "type": "string",
+            "title": "Presignedurl"
+          }
+        },
+        "type": "object",
+        "required": [
+          "presignedUrl"
+        ],
+        "title": "DownloadGraphResponse"
+      },
+      "GraphStatsResponse": {
+        "properties": {
+          "chunks": {
+            "type": "integer",
+            "title": "Chunks"
+          },
+          "entities": {
+            "type": "integer",
+            "title": "Entities"
+          },
+          "triples": {
+            "type": "integer",
+            "title": "Triples"
+          },
+          "recentQueries": {
+            "items": {
+              "$ref": "#/components/schemas/Query"
+            },
+            "type": "array",
+            "title": "Recentqueries"
+          }
+        },
+        "type": "object",
+        "required": [
+          "chunks",
+          "entities",
+          "triples",
+          "recentQueries"
+        ],
+        "title": "GraphStatsResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "InsertResponse": {
+        "properties": {
+          "memoryId": {
+            "type": "string",
+            "title": "Memoryid"
+          },
+          "requestId": {
+            "type": "string",
+            "title": "Requestid"
+          },
+          "requestTime": {
+            "type": "string",
+            "title": "Requesttime"
+          }
+        },
+        "type": "object",
+        "required": [
+          "memoryId",
+          "requestId",
+          "requestTime"
+        ],
+        "title": "InsertResponse"
+      },
+      "MemoryRequest": {
+        "properties": {
+          "memory": {
+            "type": "string",
+            "title": "Memory"
+          },
+          "memoryId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Memoryid"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "memory"
+        ],
+        "title": "MemoryRequest"
+      },
+      "Query": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "timestamp": {
+            "type": "string",
+            "title": "Timestamp"
+          },
+          "confidence": {
+            "type": "string",
+            "title": "Confidence"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "query",
+          "answer",
+          "timestamp",
+          "confidence"
+        ],
+        "title": "Query"
+      },
+      "QueryRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "parameters": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parameters"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "QueryRequest"
+      },
+      "QueryResponse": {
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "title": "Requestid"
+          },
+          "requestTime": {
+            "type": "integer",
+            "title": "Requesttime"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requestId",
+          "requestTime"
+        ],
+        "title": "QueryResponse"
+      },
+      "RequestStatus": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "context": {
+            "type": "string",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "answer",
+          "context"
+        ],
+        "title": "RequestStatus"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "apiKey"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.circlemind.co"
+    }
+  ],
+  "x-speakeasy-retries": {
+    "strategy": "backoff",
+    "backoff": {
+      "initialInterval": 500,
+      "maxInterval": 60000,
+      "maxElapsedTime": 3600000,
+      "exponent": 1.5
+    },
+    "statusCodes": [
+      "5XX"
+    ],
+    "retryConnectionErrors": true
   }
+}
