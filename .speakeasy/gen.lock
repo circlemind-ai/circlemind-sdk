@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: e543488a-81b3-4702-862f-2a1cfea780cc
 management:
-  docChecksum: 8479192c40d61c7917a205154b41ab43
-  docVersion: 0.1.0
-  speakeasyVersion: 1.425.1
-  generationVersion: 2.446.5
-  releaseVersion: 0.0.4
-  configChecksum: 7d3d42f8b99a4f80e0698b9528f60310
+  docChecksum: 1640a83d51c038c3f5b9343a1ee11f3c
+  docVersion: 0.3.0
+  speakeasyVersion: 1.441.0
+  generationVersion: 2.460.1
+  releaseVersion: 0.1.0
+  configChecksum: dc05d1ee351d2d1b94b8edcca5f479c8
   repoURL: https://github.com/circlemind-ai/circlemind-sdk.git
   installationURL: https://github.com/circlemind-ai/circlemind-sdk.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.6.3
+    core: 5.6.5
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     envVarSecurityUsage: 0.3.2
@@ -24,12 +24,14 @@ features:
     globalServerURLs: 3.0.0
     ignores: 3.0.0
     methodArguments: 1.0.2
+    multipartFileContentType: 1.0.0
     nameOverrides: 3.0.0
     nullables: 1.0.0
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.0.0
-    unions: 3.0.2
+    unions: 3.0.3
+    uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -38,21 +40,26 @@ generatedFiles:
   - .python-version
   - .vscode/settings.json
   - USAGE.md
+  - docs/models/addfilesgraphgraphnamefilespostrequest.md
+  - docs/models/bodyaddfilesgraphgraphnamefilespost.md
   - docs/models/configurerequest.md
   - docs/models/configureresponse.md
-  - docs/models/creategraphgraphgraphidpostrequest.md
-  - docs/models/getgraphconfigurationgraphgraphidconfigurationgetrequest.md
-  - docs/models/getreasoninghandlergraphgraphidreasoningrequestidgetrequest.md
+  - docs/models/creategraphgraphgraphnamepostrequest.md
+  - docs/models/files.md
+  - docs/models/getgraphconfigurationgraphgraphnameconfigurationgetrequest.md
+  - docs/models/getgraphlistgraphgetrequest.md
+  - docs/models/getinserthandlergraphgraphnameinsertrequestidgetrequest.md
+  - docs/models/getqueryhandlergraphgraphnamequeryrequestidgetrequest.md
   - docs/models/httpvalidationerror.md
+  - docs/models/insertresponse.md
   - docs/models/loc.md
   - docs/models/memoryrequest.md
-  - docs/models/memoryresponse.md
-  - docs/models/postgraphconfigurationgraphgraphidconfigurationpostrequest.md
-  - docs/models/postmemorygraphgraphidmemorypostrequest.md
-  - docs/models/postreasoninggraphgraphidreasoningpostrequest.md
-  - docs/models/reasoningrequest.md
-  - docs/models/reasoningresponse.md
-  - docs/models/reasoningstatusresponse.md
+  - docs/models/postgraphconfigurationgraphgraphnameconfigurationpostrequest.md
+  - docs/models/postinsertgraphgraphnameinsertpostrequest.md
+  - docs/models/postquerygraphgraphnamequerypostrequest.md
+  - docs/models/queryrequest.md
+  - docs/models/queryresponse.md
+  - docs/models/requeststatus.md
   - docs/models/security.md
   - docs/models/utils/retryconfig.md
   - docs/models/validationerror.md
@@ -71,20 +78,24 @@ generatedFiles:
   - src/circlemind_sdk/basesdk.py
   - src/circlemind_sdk/httpclient.py
   - src/circlemind_sdk/models/__init__.py
+  - src/circlemind_sdk/models/add_files_graph_graph_name_files_postop.py
+  - src/circlemind_sdk/models/body_add_files_graph_graph_name_files_post.py
   - src/circlemind_sdk/models/configurerequest.py
   - src/circlemind_sdk/models/configureresponse.py
-  - src/circlemind_sdk/models/create_graph_graph_graph_id_postop.py
-  - src/circlemind_sdk/models/get_graph_configuration_graph_graph_id_configuration_getop.py
-  - src/circlemind_sdk/models/get_reasoning_handler_graph_graph_id_reasoning_request_id_getop.py
+  - src/circlemind_sdk/models/create_graph_graph_graph_name_postop.py
+  - src/circlemind_sdk/models/get_graph_configuration_graph_graph_name_configuration_getop.py
+  - src/circlemind_sdk/models/get_graph_list_graph_getop.py
+  - src/circlemind_sdk/models/get_insert_handler_graph_graph_name_insert_request_id_getop.py
+  - src/circlemind_sdk/models/get_query_handler_graph_graph_name_query_request_id_getop.py
   - src/circlemind_sdk/models/httpvalidationerror.py
+  - src/circlemind_sdk/models/insertresponse.py
   - src/circlemind_sdk/models/memoryrequest.py
-  - src/circlemind_sdk/models/memoryresponse.py
-  - src/circlemind_sdk/models/post_graph_configuration_graph_graph_id_configuration_postop.py
-  - src/circlemind_sdk/models/post_memory_graph_graph_id_memory_postop.py
-  - src/circlemind_sdk/models/post_reasoning_graph_graph_id_reasoning_postop.py
-  - src/circlemind_sdk/models/reasoningrequest.py
-  - src/circlemind_sdk/models/reasoningresponse.py
-  - src/circlemind_sdk/models/reasoningstatusresponse.py
+  - src/circlemind_sdk/models/post_graph_configuration_graph_graph_name_configuration_postop.py
+  - src/circlemind_sdk/models/post_insert_graph_graph_name_insert_postop.py
+  - src/circlemind_sdk/models/post_query_graph_graph_name_query_postop.py
+  - src/circlemind_sdk/models/queryrequest.py
+  - src/circlemind_sdk/models/queryresponse.py
+  - src/circlemind_sdk/models/requeststatus.py
   - src/circlemind_sdk/models/sdkerror.py
   - src/circlemind_sdk/models/security.py
   - src/circlemind_sdk/models/validationerror.py
@@ -179,4 +190,92 @@ examples:
       responses:
         "200":
           application/json: {"memoryId": "<id>", "requestId": "<id>"}
+        "422": {}
+  get_graph_configuration_graph__graph_name__configuration_get:
+    speakeasy-default-get-graph-configuration-graph-graph-name-configuration-get:
+      parameters:
+        path:
+          graph_name: "<value>"
+      responses:
+        "200":
+          application/json: {"domain": "unsung-muscat.info", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>"]}
+        "422": {}
+  post_graph_configuration_graph__graph_name__configuration_post:
+    speakeasy-default-post-graph-configuration-graph-graph-name-configuration-post:
+      parameters:
+        path:
+          graph_name: "<value>"
+      requestBody:
+        application/json: {"domain": "agitated-cod.name", "exampleQueries": "<value>", "entityTypes": ["<value>"]}
+      responses:
+        "200":
+          application/json: {"domain": "ideal-hunger.info", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>"]}
+        "422": {}
+  create_graph_graph__graph_name__post:
+    speakeasy-default-create-graph-graph-graph-name-post:
+      parameters:
+        path:
+          graph_name: "<value>"
+      requestBody:
+        application/json: {"domain": "liquid-godfather.org", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>", "<value>"]}
+      responses:
+        "200":
+          application/json: "<value>"
+        "422": {}
+  post_query_graph__graph_name__query_post:
+    speakeasy-default-post-query-graph-graph-name-query-post:
+      parameters:
+        path:
+          graph_name: "<value>"
+      requestBody:
+        application/json: {"query": "<value>"}
+      responses:
+        "200":
+          application/json: {"requestId": "<id>", "requestTime": 478232}
+        "422": {}
+  get_query_handler_graph__graph_name__query__request_id__get:
+    speakeasy-default-get-query-handler-graph-graph-name-query-request-id-get:
+      parameters:
+        path:
+          graph_name: "<value>"
+          request_id: "<id>"
+        query:
+          requestTime: 362783
+      responses:
+        "200":
+          application/json: {"status": "<value>", "answer": "<value>", "context": "<value>"}
+        "422": {}
+  post_insert_graph__graph_name__insert_post:
+    speakeasy-default-post-insert-graph-graph-name-insert-post:
+      parameters:
+        path:
+          graph_name: "<value>"
+      requestBody:
+        application/json: {"memory": "<value>"}
+      responses:
+        "200":
+          application/json: {"memoryId": "<id>", "requestId": "<id>", "requestTime": "<value>"}
+        "422": {}
+  add_files_graph__graph_name__files_post:
+    speakeasy-default-add-files-graph-graph-name-files-post:
+      parameters:
+        path:
+          graph_name: "<value>"
+      requestBody:
+        multipart/form-data: {"files": [{}]}
+      responses:
+        "200":
+          application/json: "<value>"
+        "422": {}
+  get_insert_handler_graph__graph_name__insert__request_id__get:
+    speakeasy-default-get-insert-handler-graph-graph-name-insert-request-id-get:
+      parameters:
+        path:
+          graph_name: "<value>"
+          request_id: "<id>"
+        query:
+          requestTime: 895985
+      responses:
+        "200":
+          application/json: {"status": "<value>", "answer": "<value>", "context": "<value>"}
         "422": {}

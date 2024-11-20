@@ -1,8 +1,8 @@
-# GetGraphConfigurationGraphGraphIDConfigurationGetRequest
+# GetGraphConfigurationGraphGraphNameConfigurationGetRequest
 
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `graph_id`         | *str*              | :heavy_check_mark: | N/A                |
+| `graph_name`       | *Nullable[str]*    | :heavy_check_mark: | N/A                |

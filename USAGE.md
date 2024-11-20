@@ -8,7 +8,7 @@ s = CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
 )
 
-res = s.get_configuration(graph_id="<id>")
+res = s.get_graph_configuration(graph_name="<value>")
 
 if res is not None:
     # handle response
@@ -28,7 +28,7 @@ async def main():
     s = CirclemindSDK(
         api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
     )
-    res = await s.get_configuration_async(graph_id="<id>")
+    res = await s.get_graph_configuration_async(graph_name="<value>")
     if res is not None:
         # handle response
         pass

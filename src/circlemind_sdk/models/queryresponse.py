@@ -6,12 +6,12 @@ import pydantic
 from typing_extensions import Annotated, TypedDict
 
 
-class MemoryResponseTypedDict(TypedDict):
-    memory_id: str
+class QueryResponseTypedDict(TypedDict):
     request_id: str
+    request_time: int
 
 
-class MemoryResponse(BaseModel):
-    memory_id: Annotated[str, pydantic.Field(alias="memoryId")]
-
+class QueryResponse(BaseModel):
     request_id: Annotated[str, pydantic.Field(alias="requestId")]
+
+    request_time: Annotated[int, pydantic.Field(alias="requestTime")]

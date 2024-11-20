@@ -7,7 +7,7 @@ from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 from circlemind_sdk import models, utils
 from circlemind_sdk._hooks import HookContext, SDKHooks
-from circlemind_sdk.types import OptionalNullable, UNSET
+from circlemind_sdk.types import Nullable, OptionalNullable, UNSET
 from circlemind_sdk.utils import get_security_from_env
 import httpx
 from typing import Any, Callable, Dict, Optional, Union
@@ -92,17 +92,17 @@ class CirclemindSDK(BaseSDK):
         # pylint: disable=protected-access
         self.sdk_configuration.__dict__["_hooks"] = hooks
 
-    def get_configuration(
+    def get_graph_configuration(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> models.ConfigureResponse:
         r"""Get Graph Configuration
 
-        :param graph_id:
+        :param graph_name:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -115,13 +115,13 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetGraphConfigurationGraphGraphIDConfigurationGetRequest(
-            graph_id=graph_id,
+        request = models.GetGraphConfigurationGraphGraphNameConfigurationGetRequest(
+            graph_name=graph_name,
         )
 
         req = self.build_request(
             method="GET",
-            path="/graph/{graph_id}/configuration",
+            path="/graph/{graph_name}/configuration",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -148,7 +148,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_graph_configuration_graph__graph_id__configuration_get",
+                operation_id="get_graph_configuration_graph__graph_name__configuration_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -180,17 +180,17 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    async def get_configuration_async(
+    async def get_graph_configuration_async(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> models.ConfigureResponse:
         r"""Get Graph Configuration
 
-        :param graph_id:
+        :param graph_name:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -203,13 +203,13 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetGraphConfigurationGraphGraphIDConfigurationGetRequest(
-            graph_id=graph_id,
+        request = models.GetGraphConfigurationGraphGraphNameConfigurationGetRequest(
+            graph_name=graph_name,
         )
 
         req = self.build_request_async(
             method="GET",
-            path="/graph/{graph_id}/configuration",
+            path="/graph/{graph_name}/configuration",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -236,7 +236,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_graph_configuration_graph__graph_id__configuration_get",
+                operation_id="get_graph_configuration_graph__graph_name__configuration_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -268,10 +268,10 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    def configure(
+    def create_graph_configuration(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         configure_request: Union[
             models.ConfigureRequest, models.ConfigureRequestTypedDict
         ],
@@ -279,9 +279,9 @@ class CirclemindSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> models.ConfigureResponse:
-        r"""Change Graph Configuration
+        r"""Post Graph Configuration
 
-        :param graph_id:
+        :param graph_name:
         :param configure_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -295,8 +295,8 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PostGraphConfigurationGraphGraphIDConfigurationPostRequest(
-            graph_id=graph_id,
+        request = models.PostGraphConfigurationGraphGraphNameConfigurationPostRequest(
+            graph_name=graph_name,
             configure_request=utils.get_pydantic_model(
                 configure_request, models.ConfigureRequest
             ),
@@ -304,7 +304,7 @@ class CirclemindSDK(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/graph/{graph_id}/configuration",
+            path="/graph/{graph_name}/configuration",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -334,7 +334,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="post_graph_configuration_graph__graph_id__configuration_post",
+                operation_id="post_graph_configuration_graph__graph_name__configuration_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -366,10 +366,10 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    async def configure_async(
+    async def create_graph_configuration_async(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         configure_request: Union[
             models.ConfigureRequest, models.ConfigureRequestTypedDict
         ],
@@ -377,9 +377,9 @@ class CirclemindSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> models.ConfigureResponse:
-        r"""Change Graph Configuration
+        r"""Post Graph Configuration
 
-        :param graph_id:
+        :param graph_name:
         :param configure_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -393,8 +393,8 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PostGraphConfigurationGraphGraphIDConfigurationPostRequest(
-            graph_id=graph_id,
+        request = models.PostGraphConfigurationGraphGraphNameConfigurationPostRequest(
+            graph_name=graph_name,
             configure_request=utils.get_pydantic_model(
                 configure_request, models.ConfigureRequest
             ),
@@ -402,7 +402,7 @@ class CirclemindSDK(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/graph/{graph_id}/configuration",
+            path="/graph/{graph_name}/configuration",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -432,7 +432,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="post_graph_configuration_graph__graph_id__configuration_post",
+                operation_id="post_graph_configuration_graph__graph_name__configuration_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -464,15 +464,17 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    def list_graphs(
+    def get_graph_list(
         self,
         *,
+        graph_name: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> Any:
-        r"""List Graphs
+        r"""Get Graph List
 
+        :param graph_name:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -484,12 +486,17 @@ class CirclemindSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = models.GetGraphListGraphGetRequest(
+            graph_name=graph_name,
+        )
+
         req = self.build_request(
             method="GET",
             path="/graph",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -545,15 +552,17 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    async def list_graphs_async(
+    async def get_graph_list_async(
         self,
         *,
+        graph_name: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> Any:
-        r"""List Graphs
+        r"""Get Graph List
 
+        :param graph_name:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -565,12 +574,17 @@ class CirclemindSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = models.GetGraphListGraphGetRequest(
+            graph_name=graph_name,
+        )
+
         req = self.build_request_async(
             method="GET",
             path="/graph",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -629,7 +643,7 @@ class CirclemindSDK(BaseSDK):
     def create_graph(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         configure_request: Union[
             models.ConfigureRequest, models.ConfigureRequestTypedDict
         ],
@@ -639,7 +653,7 @@ class CirclemindSDK(BaseSDK):
     ) -> Any:
         r"""Create Graph
 
-        :param graph_id:
+        :param graph_name:
         :param configure_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -653,8 +667,8 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.CreateGraphGraphGraphIDPostRequest(
-            graph_id=graph_id,
+        request = models.CreateGraphGraphGraphNamePostRequest(
+            graph_name=graph_name,
             configure_request=utils.get_pydantic_model(
                 configure_request, models.ConfigureRequest
             ),
@@ -662,7 +676,7 @@ class CirclemindSDK(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/graph/{graph_id}",
+            path="/graph/{graph_name}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -692,7 +706,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="create_graph_graph__graph_id__post",
+                operation_id="create_graph_graph__graph_name__post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -727,7 +741,7 @@ class CirclemindSDK(BaseSDK):
     async def create_graph_async(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         configure_request: Union[
             models.ConfigureRequest, models.ConfigureRequestTypedDict
         ],
@@ -737,7 +751,7 @@ class CirclemindSDK(BaseSDK):
     ) -> Any:
         r"""Create Graph
 
-        :param graph_id:
+        :param graph_name:
         :param configure_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -751,8 +765,8 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.CreateGraphGraphGraphIDPostRequest(
-            graph_id=graph_id,
+        request = models.CreateGraphGraphGraphNamePostRequest(
+            graph_name=graph_name,
             configure_request=utils.get_pydantic_model(
                 configure_request, models.ConfigureRequest
             ),
@@ -760,7 +774,7 @@ class CirclemindSDK(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/graph/{graph_id}",
+            path="/graph/{graph_name}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -790,7 +804,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="create_graph_graph__graph_id__post",
+                operation_id="create_graph_graph__graph_name__post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -822,21 +836,19 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    def query(
+    def create_query(
         self,
         *,
-        graph_id: str,
-        reasoning_request: Union[
-            models.ReasoningRequest, models.ReasoningRequestTypedDict
-        ],
+        graph_name: Nullable[str],
+        query_request: Union[models.QueryRequest, models.QueryRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> models.ReasoningResponse:
-        r"""Start Reasoning
+    ) -> models.QueryResponse:
+        r"""Post Query
 
-        :param graph_id:
-        :param reasoning_request:
+        :param graph_name:
+        :param query_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -849,16 +861,14 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PostReasoningGraphGraphIDReasoningPostRequest(
-            graph_id=graph_id,
-            reasoning_request=utils.get_pydantic_model(
-                reasoning_request, models.ReasoningRequest
-            ),
+        request = models.PostQueryGraphGraphNameQueryPostRequest(
+            graph_name=graph_name,
+            query_request=utils.get_pydantic_model(query_request, models.QueryRequest),
         )
 
         req = self.build_request(
             method="POST",
-            path="/graph/{graph_id}/reasoning",
+            path="/graph/{graph_name}/query",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -869,7 +879,7 @@ class CirclemindSDK(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.reasoning_request, False, False, "json", models.ReasoningRequest
+                request.query_request, False, False, "json", models.QueryRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -888,7 +898,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="post_reasoning_graph__graph_id__reasoning_post",
+                operation_id="post_query_graph__graph_name__query_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -901,7 +911,7 @@ class CirclemindSDK(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ReasoningResponse)
+            return utils.unmarshal_json(http_res.text, models.QueryResponse)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
             raise models.HTTPValidationError(data=data)
@@ -920,21 +930,19 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    async def query_async(
+    async def create_query_async(
         self,
         *,
-        graph_id: str,
-        reasoning_request: Union[
-            models.ReasoningRequest, models.ReasoningRequestTypedDict
-        ],
+        graph_name: Nullable[str],
+        query_request: Union[models.QueryRequest, models.QueryRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> models.ReasoningResponse:
-        r"""Start Reasoning
+    ) -> models.QueryResponse:
+        r"""Post Query
 
-        :param graph_id:
-        :param reasoning_request:
+        :param graph_name:
+        :param query_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -947,16 +955,14 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PostReasoningGraphGraphIDReasoningPostRequest(
-            graph_id=graph_id,
-            reasoning_request=utils.get_pydantic_model(
-                reasoning_request, models.ReasoningRequest
-            ),
+        request = models.PostQueryGraphGraphNameQueryPostRequest(
+            graph_name=graph_name,
+            query_request=utils.get_pydantic_model(query_request, models.QueryRequest),
         )
 
         req = self.build_request_async(
             method="POST",
-            path="/graph/{graph_id}/reasoning",
+            path="/graph/{graph_name}/query",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -967,7 +973,7 @@ class CirclemindSDK(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.reasoning_request, False, False, "json", models.ReasoningRequest
+                request.query_request, False, False, "json", models.QueryRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -986,7 +992,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="post_reasoning_graph__graph_id__reasoning_post",
+                operation_id="post_query_graph__graph_name__query_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -999,7 +1005,7 @@ class CirclemindSDK(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ReasoningResponse)
+            return utils.unmarshal_json(http_res.text, models.QueryResponse)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
             raise models.HTTPValidationError(data=data)
@@ -1018,19 +1024,19 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    def get_reasoning(
+    def get_query_handler(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         request_id: str,
         request_time: int,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> models.ReasoningStatusResponse:
-        r"""Get Reasoning
+    ) -> models.RequestStatus:
+        r"""Get Query Handler
 
-        :param graph_id:
+        :param graph_name:
         :param request_id:
         :param request_time:
         :param retries: Override the default retry configuration for this method
@@ -1045,15 +1051,15 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetReasoningHandlerGraphGraphIDReasoningRequestIDGetRequest(
-            graph_id=graph_id,
+        request = models.GetQueryHandlerGraphGraphNameQueryRequestIDGetRequest(
+            graph_name=graph_name,
             request_id=request_id,
             request_time=request_time,
         )
 
         req = self.build_request(
             method="GET",
-            path="/graph/{graph_id}/reasoning/{request_id}",
+            path="/graph/{graph_name}/query/{request_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1080,7 +1086,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_reasoning_handler_graph__graph_id__reasoning__request_id__get",
+                operation_id="get_query_handler_graph__graph_name__query__request_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1093,7 +1099,7 @@ class CirclemindSDK(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ReasoningStatusResponse)
+            return utils.unmarshal_json(http_res.text, models.RequestStatus)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
             raise models.HTTPValidationError(data=data)
@@ -1112,19 +1118,19 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    async def get_reasoning_async(
+    async def get_query_handler_async(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         request_id: str,
         request_time: int,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> models.ReasoningStatusResponse:
-        r"""Get Reasoning
+    ) -> models.RequestStatus:
+        r"""Get Query Handler
 
-        :param graph_id:
+        :param graph_name:
         :param request_id:
         :param request_time:
         :param retries: Override the default retry configuration for this method
@@ -1139,15 +1145,15 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetReasoningHandlerGraphGraphIDReasoningRequestIDGetRequest(
-            graph_id=graph_id,
+        request = models.GetQueryHandlerGraphGraphNameQueryRequestIDGetRequest(
+            graph_name=graph_name,
             request_id=request_id,
             request_time=request_time,
         )
 
         req = self.build_request_async(
             method="GET",
-            path="/graph/{graph_id}/reasoning/{request_id}",
+            path="/graph/{graph_name}/query/{request_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1174,7 +1180,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_reasoning_handler_graph__graph_id__reasoning__request_id__get",
+                operation_id="get_query_handler_graph__graph_name__query__request_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1187,7 +1193,7 @@ class CirclemindSDK(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ReasoningStatusResponse)
+            return utils.unmarshal_json(http_res.text, models.RequestStatus)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
             raise models.HTTPValidationError(data=data)
@@ -1206,18 +1212,18 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    def add(
+    def create_insert(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         memory_request: Union[models.MemoryRequest, models.MemoryRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> models.MemoryResponse:
-        r"""Post Memory
+    ) -> models.InsertResponse:
+        r"""Post Insert
 
-        :param graph_id:
+        :param graph_name:
         :param memory_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1231,8 +1237,8 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PostMemoryGraphGraphIDMemoryPostRequest(
-            graph_id=graph_id,
+        request = models.PostInsertGraphGraphNameInsertPostRequest(
+            graph_name=graph_name,
             memory_request=utils.get_pydantic_model(
                 memory_request, models.MemoryRequest
             ),
@@ -1240,7 +1246,7 @@ class CirclemindSDK(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/graph/{graph_id}/memory",
+            path="/graph/{graph_name}/insert",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1270,7 +1276,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="post_memory_graph__graph_id__memory_post",
+                operation_id="post_insert_graph__graph_name__insert_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1283,7 +1289,7 @@ class CirclemindSDK(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.MemoryResponse)
+            return utils.unmarshal_json(http_res.text, models.InsertResponse)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
             raise models.HTTPValidationError(data=data)
@@ -1302,18 +1308,18 @@ class CirclemindSDK(BaseSDK):
             http_res,
         )
 
-    async def add_async(
+    async def create_insert_async(
         self,
         *,
-        graph_id: str,
+        graph_name: Nullable[str],
         memory_request: Union[models.MemoryRequest, models.MemoryRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> models.MemoryResponse:
-        r"""Post Memory
+    ) -> models.InsertResponse:
+        r"""Post Insert
 
-        :param graph_id:
+        :param graph_name:
         :param memory_request:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1327,8 +1333,8 @@ class CirclemindSDK(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PostMemoryGraphGraphIDMemoryPostRequest(
-            graph_id=graph_id,
+        request = models.PostInsertGraphGraphNameInsertPostRequest(
+            graph_name=graph_name,
             memory_request=utils.get_pydantic_model(
                 memory_request, models.MemoryRequest
             ),
@@ -1336,7 +1342,7 @@ class CirclemindSDK(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/graph/{graph_id}/memory",
+            path="/graph/{graph_name}/insert",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1366,7 +1372,7 @@ class CirclemindSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="post_memory_graph__graph_id__memory_post",
+                operation_id="post_insert_graph__graph_name__insert_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1379,7 +1385,403 @@ class CirclemindSDK(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.MemoryResponse)
+            return utils.unmarshal_json(http_res.text, models.InsertResponse)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
+            raise models.HTTPValidationError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def create_graph_files(
+        self,
+        *,
+        graph_name: Nullable[str],
+        body_add_files_graph_graph_name_files_post: Union[
+            models.BodyAddFilesGraphGraphNameFilesPost,
+            models.BodyAddFilesGraphGraphNameFilesPostTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Any:
+        r"""Add Files
+
+        :param graph_name:
+        :param body_add_files_graph_graph_name_files_post:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = models.AddFilesGraphGraphNameFilesPostRequest(
+            graph_name=graph_name,
+            body_add_files_graph_graph_name_files_post=utils.get_pydantic_model(
+                body_add_files_graph_graph_name_files_post,
+                models.BodyAddFilesGraphGraphNameFilesPost,
+            ),
+        )
+
+        req = self.build_request(
+            method="POST",
+            path="/graph/{graph_name}/files",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body_add_files_graph_graph_name_files_post,
+                False,
+                False,
+                "multipart",
+                models.BodyAddFilesGraphGraphNameFilesPost,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                operation_id="add_files_graph__graph_name__files_post",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(http_res.text, Any)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
+            raise models.HTTPValidationError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def create_graph_files_async(
+        self,
+        *,
+        graph_name: Nullable[str],
+        body_add_files_graph_graph_name_files_post: Union[
+            models.BodyAddFilesGraphGraphNameFilesPost,
+            models.BodyAddFilesGraphGraphNameFilesPostTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Any:
+        r"""Add Files
+
+        :param graph_name:
+        :param body_add_files_graph_graph_name_files_post:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = models.AddFilesGraphGraphNameFilesPostRequest(
+            graph_name=graph_name,
+            body_add_files_graph_graph_name_files_post=utils.get_pydantic_model(
+                body_add_files_graph_graph_name_files_post,
+                models.BodyAddFilesGraphGraphNameFilesPost,
+            ),
+        )
+
+        req = self.build_request_async(
+            method="POST",
+            path="/graph/{graph_name}/files",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body_add_files_graph_graph_name_files_post,
+                False,
+                False,
+                "multipart",
+                models.BodyAddFilesGraphGraphNameFilesPost,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                operation_id="add_files_graph__graph_name__files_post",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(http_res.text, Any)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
+            raise models.HTTPValidationError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def get_insert_handler(
+        self,
+        *,
+        graph_name: Nullable[str],
+        request_id: str,
+        request_time: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> models.RequestStatus:
+        r"""Get Insert Handler
+
+        :param graph_name:
+        :param request_id:
+        :param request_time:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = models.GetInsertHandlerGraphGraphNameInsertRequestIDGetRequest(
+            graph_name=graph_name,
+            request_id=request_id,
+            request_time=request_time,
+        )
+
+        req = self.build_request(
+            method="GET",
+            path="/graph/{graph_name}/insert/{request_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                operation_id="get_insert_handler_graph__graph_name__insert__request_id__get",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(http_res.text, models.RequestStatus)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
+            raise models.HTTPValidationError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def get_insert_handler_async(
+        self,
+        *,
+        graph_name: Nullable[str],
+        request_id: str,
+        request_time: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> models.RequestStatus:
+        r"""Get Insert Handler
+
+        :param graph_name:
+        :param request_id:
+        :param request_time:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = models.GetInsertHandlerGraphGraphNameInsertRequestIDGetRequest(
+            graph_name=graph_name,
+            request_id=request_id,
+            request_time=request_time,
+        )
+
+        req = self.build_request_async(
+            method="GET",
+            path="/graph/{graph_name}/insert/{request_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                operation_id="get_insert_handler_graph__graph_name__insert__request_id__get",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(http_res.text, models.RequestStatus)
         if utils.match_response(http_res, "422", "application/json"):
             data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
             raise models.HTTPValidationError(data=data)
