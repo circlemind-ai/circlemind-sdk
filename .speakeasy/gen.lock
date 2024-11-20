@@ -1,20 +1,22 @@
 lockVersion: 2.0.0
 id: e543488a-81b3-4702-862f-2a1cfea780cc
 management:
-  docChecksum: a3bc8f553c127b604e71f95165444f3f
+  docChecksum: 8479192c40d61c7917a205154b41ab43
   docVersion: 0.1.0
-  speakeasyVersion: 1.419.2
-  generationVersion: 2.438.15
-  releaseVersion: 0.0.3
-  configChecksum: cfe8d9913762b6d62df245e77882bb3c
+  speakeasyVersion: 1.425.1
+  generationVersion: 2.446.5
+  releaseVersion: 0.0.4
+  configChecksum: 7d3d42f8b99a4f80e0698b9528f60310
+  repoURL: https://github.com/circlemind-ai/circlemind-sdk.git
+  installationURL: https://github.com/circlemind-ai/circlemind-sdk.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.6.0
+    core: 5.6.3
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
-    envVarSecurityUsage: 0.3.1
+    envVarSecurityUsage: 0.3.2
     flattening: 3.1.0
     globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
@@ -59,7 +61,6 @@ generatedFiles:
   - py.typed
   - pylintrc
   - pyproject.toml
-  - scripts/compile.sh
   - scripts/prepare-readme.py
   - scripts/publish.sh
   - src/circlemind_sdk/__init__.py

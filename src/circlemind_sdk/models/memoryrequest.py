@@ -25,10 +25,8 @@ class MemoryRequest(BaseModel):
     memory_id: Annotated[OptionalNullable[str], pydantic.Field(alias="memoryId")] = (
         UNSET
     )
-    
-    metadata: Annotated[OptionalNullable[str], pydantic.Field(alias="metadata")] = (
-        UNSET
-    )
+
+    metadata: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
