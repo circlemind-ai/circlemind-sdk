@@ -12,12 +12,12 @@ from pydantic import model_serializer
 from typing_extensions import NotRequired, TypedDict
 
 
-class ReasoningRequestTypedDict(TypedDict):
+class QueryRequestTypedDict(TypedDict):
     query: str
     parameters: NotRequired[Nullable[str]]
 
 
-class ReasoningRequest(BaseModel):
+class QueryRequest(BaseModel):
     query: str
 
     parameters: OptionalNullable[str] = UNSET

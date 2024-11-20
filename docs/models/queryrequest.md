@@ -1,4 +1,4 @@
-# ReasoningRequest
+# QueryRequest
 
 
 ## Fields

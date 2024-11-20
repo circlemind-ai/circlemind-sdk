@@ -5,15 +5,15 @@ from circlemind_sdk.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class ReasoningStatusResponseTypedDict(TypedDict):
+class RequestStatusTypedDict(TypedDict):
     status: str
-    memories: str
+    answer: str
     context: str
 
 
-class ReasoningStatusResponse(BaseModel):
+class RequestStatus(BaseModel):
     status: str
 
-    memories: str
+    answer: str
 
     context: str
