@@ -1,4 +1,4 @@
-# GetGraphConfigurationGraphGraphNameConfigurationGetRequest
+# DeleteGraphGraphGraphNameDeletePostRequest
 
 
 ## Fields

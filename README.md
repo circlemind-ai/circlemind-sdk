@@ -20,17 +20,22 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *circ
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [circlemind-sdk](#circlemind-sdk)
+  * [SDK Installation](#sdk-installation)
+  * [IDE Support](#ide-support)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Debugging](#debugging)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [IDE Support](#ide-support)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -75,15 +80,14 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_configuration(graph_name="<value>")
+    res = circlemind_sdk.get_user_plan_plan_get()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -96,13 +100,14 @@ from circlemind_sdk import CirclemindSDK
 import os
 
 async def main():
-    s = CirclemindSDK(
+    async with CirclemindSDK(
         api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-    )
-    res = await s.get_graph_configuration_async(graph_name="<value>")
-    if res is not None:
-        # handle response
-        pass
+    ) as circlemind_sdk:
+
+        res = await circlemind_sdk.get_user_plan_plan_get_async()
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -116,15 +121,18 @@ asyncio.run(main())
 
 ### [CirclemindSDK](docs/sdks/circlemindsdk/README.md)
 
-* [get_graph_configuration](docs/sdks/circlemindsdk/README.md#get_graph_configuration) - Get Graph Configuration
-* [create_graph_configuration](docs/sdks/circlemindsdk/README.md#create_graph_configuration) - Post Graph Configuration
-* [get_graph_list](docs/sdks/circlemindsdk/README.md#get_graph_list) - Get Graph List
-* [create_graph](docs/sdks/circlemindsdk/README.md#create_graph) - Create Graph
-* [create_query](docs/sdks/circlemindsdk/README.md#create_query) - Post Query
-* [get_query_handler](docs/sdks/circlemindsdk/README.md#get_query_handler) - Get Query Handler
-* [create_insert](docs/sdks/circlemindsdk/README.md#create_insert) - Post Insert
-* [create_graph_files](docs/sdks/circlemindsdk/README.md#create_graph_files) - Add Files
-* [get_insert_handler](docs/sdks/circlemindsdk/README.md#get_insert_handler) - Get Insert Handler
+* [get_user_plan_plan_get](docs/sdks/circlemindsdk/README.md#get_user_plan_plan_get) - User plan
+* [get_graph_configuration](docs/sdks/circlemindsdk/README.md#get_graph_configuration) - Graph configuration (get)
+* [set_graph_configuration](docs/sdks/circlemindsdk/README.md#set_graph_configuration) - Graph configuration (set)
+* [list_graphs](docs/sdks/circlemindsdk/README.md#list_graphs) - List graphs
+* [create_graph](docs/sdks/circlemindsdk/README.md#create_graph) - Create new graph
+* [delete_graph](docs/sdks/circlemindsdk/README.md#delete_graph) - Delete existing graph
+* [download_graphml](docs/sdks/circlemindsdk/README.md#download_graphml) - Download graphml
+* [query](docs/sdks/circlemindsdk/README.md#query) - Query memory
+* [get_query_status](docs/sdks/circlemindsdk/README.md#get_query_status) - Check query request status
+* [add](docs/sdks/circlemindsdk/README.md#add) - Add memory
+* [add_from_files](docs/sdks/circlemindsdk/README.md#add_from_files) - Add memory (from files)
+* [get_add_status](docs/sdks/circlemindsdk/README.md#get_add_status) - Check add request status
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -137,38 +145,36 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
 from circlemind_sdk import CirclemindSDK
-from circlemindsdk.utils import BackoffStrategy, RetryConfig
+from circlemind_sdk.utils import BackoffStrategy, RetryConfig
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_configuration(graph_name="<value>",
-    RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
+    res = circlemind_sdk.get_user_plan_plan_get(,
+        RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
 from circlemind_sdk import CirclemindSDK
-from circlemindsdk.utils import BackoffStrategy, RetryConfig
+from circlemind_sdk.utils import BackoffStrategy, RetryConfig
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_configuration(graph_name="<value>")
+    res = circlemind_sdk.get_user_plan_plan_get()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 <!-- End Retries [retries] -->
@@ -200,24 +206,23 @@ When custom error responses are specified for an operation, the SDK may also rai
 from circlemind_sdk import CirclemindSDK, models
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
+    res = None
+    try:
 
-res = None
-try:
-    res = s.get_graph_configuration(graph_name="<value>")
+        res = circlemind_sdk.get_graph_configuration(graph_name="<value>")
 
-    if res is not None:
-        # handle response
-        pass
+        # Handle response
+        print(res)
 
-except models.HTTPValidationError as e:
-    # handle e.data: models.HTTPValidationErrorData
-    raise(e)
-except models.SDKError as e:
-    # handle exception
-    raise(e)
+    except models.HTTPValidationError as e:
+        # handle e.data: models.HTTPValidationErrorData
+        raise(e)
+    except models.SDKError as e:
+        # handle exception
+        raise(e)
 ```
 <!-- End Error Handling [errors] -->
 
@@ -231,16 +236,15 @@ The default server can also be overridden globally by passing a URL to the `serv
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     server_url="https://api.circlemind.co",
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_configuration(graph_name="<value>")
+    res = circlemind_sdk.get_user_plan_plan_get()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 <!-- End Server Selection [server] -->
@@ -342,15 +346,14 @@ To authenticate with the API the `api_key_header` parameter must be set when ini
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_configuration(graph_name="<value>")
+    res = circlemind_sdk.get_user_plan_plan_get()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 <!-- End Authentication [security] -->

@@ -7,11 +7,19 @@ from typing_extensions import Annotated, TypedDict
 
 
 class QueryResponseTypedDict(TypedDict):
+    r"""Data model for query response."""
+
     request_id: str
+    r"""Unique request ID to be used to track the request status"""
     request_time: int
+    r"""Further value to provide to track the request status"""
 
 
 class QueryResponse(BaseModel):
+    r"""Data model for query response."""
+
     request_id: Annotated[str, pydantic.Field(alias="requestId")]
+    r"""Unique request ID to be used to track the request status"""
 
     request_time: Annotated[int, pydantic.Field(alias="requestTime")]
+    r"""Further value to provide to track the request status"""

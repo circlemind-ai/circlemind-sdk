@@ -13,14 +13,30 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class QueryRequestTypedDict(TypedDict):
+    r"""Data model for query request."""
+
     query: str
     parameters: NotRequired[Nullable[str]]
+    r"""Optional stringified JSON parameters:
+    - only_context (bool = false): return only the context of the query instead of processing it via an LLM;
+    - with_references (bool = false): include references in the response.
+
+    (i.e., `'{\"only_context\": true}'`)
+    """
 
 
 class QueryRequest(BaseModel):
+    r"""Data model for query request."""
+
     query: str
 
     parameters: OptionalNullable[str] = UNSET
+    r"""Optional stringified JSON parameters:
+    - only_context (bool = false): return only the context of the query instead of processing it via an LLM;
+    - with_references (bool = false): include references in the response.
+
+    (i.e., `'{\"only_context\": true}'`)
+    """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

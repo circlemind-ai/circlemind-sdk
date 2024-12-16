@@ -6,11 +6,11 @@ from circlemind_sdk.utils import FieldMetadata, PathParamMetadata
 from typing_extensions import Annotated, TypedDict
 
 
-class GetGraphConfigurationGraphGraphNameConfigurationGetRequestTypedDict(TypedDict):
+class DeleteGraphGraphGraphNameDeletePostRequestTypedDict(TypedDict):
     graph_name: str
 
 
-class GetGraphConfigurationGraphGraphNameConfigurationGetRequest(BaseModel):
+class DeleteGraphGraphGraphNameDeletePostRequest(BaseModel):
     graph_name: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]

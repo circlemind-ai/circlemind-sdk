@@ -7,14 +7,24 @@ from typing_extensions import Annotated, TypedDict
 
 
 class InsertResponseTypedDict(TypedDict):
-    memory_id: str
+    r"""Data model for insert response."""
+
     request_id: str
-    request_time: str
+    r"""Unique request ID to be used to track the request status"""
+    request_time: int
+    r"""Further value to provide to track the request status"""
+    memory_id: str
+    r"""Reserved"""
 
 
 class InsertResponse(BaseModel):
-    memory_id: Annotated[str, pydantic.Field(alias="memoryId")]
+    r"""Data model for insert response."""
 
     request_id: Annotated[str, pydantic.Field(alias="requestId")]
+    r"""Unique request ID to be used to track the request status"""
 
-    request_time: Annotated[str, pydantic.Field(alias="requestTime")]
+    request_time: Annotated[int, pydantic.Field(alias="requestTime")]
+    r"""Further value to provide to track the request status"""
+
+    memory_id: Annotated[str, pydantic.Field(alias="memoryId")]
+    r"""Reserved"""

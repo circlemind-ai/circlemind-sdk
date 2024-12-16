@@ -4,15 +4,14 @@
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_configuration(graph_name="<value>")
+    res = circlemind_sdk.get_user_plan_plan_get()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -25,13 +24,14 @@ from circlemind_sdk import CirclemindSDK
 import os
 
 async def main():
-    s = CirclemindSDK(
+    async with CirclemindSDK(
         api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-    )
-    res = await s.get_graph_configuration_async(graph_name="<value>")
-    if res is not None:
-        # handle response
-        pass
+    ) as circlemind_sdk:
+
+        res = await circlemind_sdk.get_user_plan_plan_get_async()
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
