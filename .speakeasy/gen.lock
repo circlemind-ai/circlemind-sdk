@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: e543488a-81b3-4702-862f-2a1cfea780cc
 management:
-  docChecksum: 1640a83d51c038c3f5b9343a1ee11f3c
-  docVersion: 0.3.0
-  speakeasyVersion: 1.441.0
-  generationVersion: 2.460.1
-  releaseVersion: 0.1.0
-  configChecksum: dc05d1ee351d2d1b94b8edcca5f479c8
+  docChecksum: f7b43ac674bea49b7ce5d016589e3e5b
+  docVersion: 0.0.4
+  speakeasyVersion: 1.455.6
+  generationVersion: 2.479.7
+  releaseVersion: 0.1.0-post0
+  configChecksum: 083bdb03619e296ce1850927beaf1a9c
   repoURL: https://github.com/circlemind-ai/circlemind-sdk.git
   installationURL: https://github.com/circlemind-ai/circlemind-sdk.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.6.5
+    core: 5.7.3
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     envVarSecurityUsage: 0.3.2
@@ -22,7 +22,6 @@ features:
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.0.0
-    ignores: 3.0.0
     methodArguments: 1.0.2
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.0
@@ -30,7 +29,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.0.0
-    unions: 3.0.3
+    unions: 3.0.4
     uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
@@ -40,21 +39,25 @@ generatedFiles:
   - .python-version
   - .vscode/settings.json
   - USAGE.md
-  - docs/models/addfilesgraphgraphnamefilespostrequest.md
-  - docs/models/bodyaddfilesgraphgraphnamefilespost.md
+  - docs/models/bodypostinsertfilesgraphgraphnamefilespost.md
   - docs/models/configurerequest.md
   - docs/models/configureresponse.md
   - docs/models/creategraphgraphgraphnamepostrequest.md
+  - docs/models/deletegraphgraphgraphnamedeletepostrequest.md
+  - docs/models/downloadgraphresponse.md
   - docs/models/files.md
   - docs/models/getgraphconfigurationgraphgraphnameconfigurationgetrequest.md
-  - docs/models/getgraphlistgraphgetrequest.md
-  - docs/models/getinserthandlergraphgraphnameinsertrequestidgetrequest.md
-  - docs/models/getqueryhandlergraphgraphnamequeryrequestidgetrequest.md
+  - docs/models/getgraphmlgraphgraphnamegraphmlgetrequest.md
+  - docs/models/getinsertstatusgraphgraphnameinsertrequestidgetrequest.md
+  - docs/models/getquerystatusgraphgraphnamequeryrequestidgetrequest.md
+  - docs/models/graphlistresponse.md
   - docs/models/httpvalidationerror.md
+  - docs/models/insertrequest.md
   - docs/models/insertresponse.md
   - docs/models/loc.md
-  - docs/models/memoryrequest.md
+  - docs/models/planresponse.md
   - docs/models/postgraphconfigurationgraphgraphnameconfigurationpostrequest.md
+  - docs/models/postinsertfilesgraphgraphnamefilespostrequest.md
   - docs/models/postinsertgraphgraphnameinsertpostrequest.md
   - docs/models/postquerygraphgraphnamequerypostrequest.md
   - docs/models/queryrequest.md
@@ -78,19 +81,23 @@ generatedFiles:
   - src/circlemind_sdk/basesdk.py
   - src/circlemind_sdk/httpclient.py
   - src/circlemind_sdk/models/__init__.py
-  - src/circlemind_sdk/models/add_files_graph_graph_name_files_postop.py
-  - src/circlemind_sdk/models/body_add_files_graph_graph_name_files_post.py
+  - src/circlemind_sdk/models/body_post_insert_files_graph_graph_name_files_post.py
   - src/circlemind_sdk/models/configurerequest.py
   - src/circlemind_sdk/models/configureresponse.py
   - src/circlemind_sdk/models/create_graph_graph_graph_name_postop.py
+  - src/circlemind_sdk/models/delete_graph_graph_graph_name_delete_postop.py
+  - src/circlemind_sdk/models/downloadgraphresponse.py
   - src/circlemind_sdk/models/get_graph_configuration_graph_graph_name_configuration_getop.py
-  - src/circlemind_sdk/models/get_graph_list_graph_getop.py
-  - src/circlemind_sdk/models/get_insert_handler_graph_graph_name_insert_request_id_getop.py
-  - src/circlemind_sdk/models/get_query_handler_graph_graph_name_query_request_id_getop.py
+  - src/circlemind_sdk/models/get_graphml_graph_graph_name_graphml_getop.py
+  - src/circlemind_sdk/models/get_insert_status_graph_graph_name_insert_request_id_getop.py
+  - src/circlemind_sdk/models/get_query_status_graph_graph_name_query_request_id_getop.py
+  - src/circlemind_sdk/models/graphlistresponse.py
   - src/circlemind_sdk/models/httpvalidationerror.py
+  - src/circlemind_sdk/models/insertrequest.py
   - src/circlemind_sdk/models/insertresponse.py
-  - src/circlemind_sdk/models/memoryrequest.py
+  - src/circlemind_sdk/models/planresponse.py
   - src/circlemind_sdk/models/post_graph_configuration_graph_graph_name_configuration_postop.py
+  - src/circlemind_sdk/models/post_insert_files_graph_graph_name_files_postop.py
   - src/circlemind_sdk/models/post_insert_graph_graph_name_insert_postop.py
   - src/circlemind_sdk/models/post_query_graph_graph_name_query_postop.py
   - src/circlemind_sdk/models/queryrequest.py
@@ -144,7 +151,7 @@ examples:
     speakeasy-default-get-graph-list-graph-get:
       responses:
         "200":
-          application/json: "<value>"
+          application/json: {"graphs": ["<value>", "<value>", "<value>"]}
         "422": {}
   create_graph_graph__graph_id__post:
     speakeasy-default-create-graph-graph-graph-id-post:
@@ -220,7 +227,7 @@ examples:
         application/json: {"domain": "liquid-godfather.org", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>", "<value>"]}
       responses:
         "200":
-          application/json: "<value>"
+          application/json: {"domain": "liquid-godfather.org", "exampleQueries": "<value>", "entityTypes": ["<value>", "<value>", "<value>"]}
         "422": {}
   post_query_graph__graph_name__query_post:
     speakeasy-default-post-query-graph-graph-name-query-post:
@@ -254,7 +261,7 @@ examples:
         application/json: {"memory": "<value>"}
       responses:
         "200":
-          application/json: {"memoryId": "<id>", "requestId": "<id>", "requestTime": "<value>"}
+          application/json: {"requestId": "<id>", "requestTime": "<value>", "memoryId": "<id>"}
         "422": {}
   add_files_graph__graph_name__files_post:
     speakeasy-default-add-files-graph-graph-name-files-post:
@@ -279,3 +286,62 @@ examples:
         "200":
           application/json: {"status": "<value>", "answer": "<value>", "context": "<value>"}
         "422": {}
+  get_user_plan_plan_get:
+    speakeasy-default-get-user-plan-plan-get:
+      responses:
+        "200":
+          application/json: {"requestsCount": "9154.04", "requestsMax": 971845, "planId": "<id>", "planTTL": 567555}
+  delete_graph_graph__graph_name__delete_post:
+    speakeasy-default-delete-graph-graph-graph-name-delete-post:
+      parameters:
+        path:
+          graph_name: "<value>"
+      responses:
+        "200":
+          application/json: "<value>"
+        "422": {}
+  get_graphml_graph__graph_name__graphml_get:
+    speakeasy-default-get-graphml-graph-graph-name-graphml-get:
+      parameters:
+        path:
+          graph_name: "<value>"
+      responses:
+        "200":
+          application/json: {"presignedUrl": "https://amazing-understanding.org/"}
+        "422": {}
+  get_query_status_graph__graph_name__query__request_id__get:
+    speakeasy-default-get-query-status-graph-graph-name-query-request-id-get:
+      parameters:
+        path:
+          graph_name: "<value>"
+          request_id: "<id>"
+        query:
+          requestTime: 816039
+      responses:
+        "200":
+          application/json: {"status": "<value>", "answer": "<value>", "context": "<value>"}
+        "422": {}
+  post_insert_files_graph__graph_name__files_post:
+    speakeasy-default-post-insert-files-graph-graph-name-files-post:
+      parameters:
+        path:
+          graph_name: "<value>"
+      requestBody:
+        multipart/form-data: {"files": [{}, {}]}
+      responses:
+        "200":
+          application/json: {"requestId": "<id>", "requestTime": 296236, "memoryId": "<id>"}
+        "422": {}
+  get_insert_status_graph__graph_name__insert__request_id__get:
+    speakeasy-default-get-insert-status-graph-graph-name-insert-request-id-get:
+      parameters:
+        path:
+          graph_name: "<value>"
+          request_id: "<id>"
+        query:
+          requestTime: 877284
+      responses:
+        "200":
+          application/json: {"status": "<value>", "answer": "<value>", "context": "<value>"}
+        "422": {}
+generatedTests: {}

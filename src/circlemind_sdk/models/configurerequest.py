@@ -8,12 +8,16 @@ from typing_extensions import Annotated, TypedDict
 
 
 class ConfigureRequestTypedDict(TypedDict):
+    r"""Data model for graph configuration request."""
+
     domain: str
     example_queries: str
     entity_types: List[str]
 
 
 class ConfigureRequest(BaseModel):
+    r"""Data model for graph configuration request."""
+
     domain: str
 
     example_queries: Annotated[str, pydantic.Field(alias="exampleQueries")]

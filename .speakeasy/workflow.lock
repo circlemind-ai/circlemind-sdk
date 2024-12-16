@@ -1,20 +1,21 @@
-speakeasyVersion: 1.441.0
+speakeasyVersion: 1.455.6
 sources:
     CirclemindSDK-OAS:
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:923be31e0c441aa56b52078d053d818741d896d270cd722de171206549844efa
-        sourceBlobDigest: sha256:bc632a8eddce0a78d4f3f4e0b623c64c58f0a7d8271b4919de69bb918ac792cc
+        sourceRevisionDigest: sha256:2758caf5474f484de1a4bfac29c043126cf260fad4633b4d85419cdccdd1f847
+        sourceBlobDigest: sha256:16c2e2296dd00719388d62f41b67b54b68c890a4cb2d8c6cf418576dc6a80565
         tags:
             - latest
-            - speakeasy-sdk-regen-1732061009
+            - speakeasy-sdk-regen-1734367818
+            - 0.0.4
 targets:
     circlemind-sdk:
         source: CirclemindSDK-OAS
         sourceNamespace: circlemind-sdk-oas
-        sourceRevisionDigest: sha256:923be31e0c441aa56b52078d053d818741d896d270cd722de171206549844efa
-        sourceBlobDigest: sha256:bc632a8eddce0a78d4f3f4e0b623c64c58f0a7d8271b4919de69bb918ac792cc
-        codeSamplesNamespace: circlemind-sdk-oas-code-samples
-        codeSamplesRevisionDigest: sha256:f2c67827b1da134c8646849a7f04c892367d18f71fcd6ee9fbcd2b260f26a6f1
+        sourceRevisionDigest: sha256:2758caf5474f484de1a4bfac29c043126cf260fad4633b4d85419cdccdd1f847
+        sourceBlobDigest: sha256:16c2e2296dd00719388d62f41b67b54b68c890a4cb2d8c6cf418576dc6a80565
+        codeSamplesNamespace: circlemind-sdk-oas-python-code-samples
+        codeSamplesRevisionDigest: sha256:70bb068b0f3014dfd9edfccd4aa5df6fbe8fb7f3c12f35adb26aad151cd00aa7
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -33,5 +34,5 @@ workflow:
                     token: $pypi_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas-code-samples
+                    location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas-python-code-samples
                 blocking: false

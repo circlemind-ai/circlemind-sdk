@@ -1,5 +1,7 @@
 # ConfigureResponse
 
+Data model for graph configuration response.
+
 
 ## Fields
 

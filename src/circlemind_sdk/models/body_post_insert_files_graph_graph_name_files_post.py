@@ -17,7 +17,7 @@ class FilesTypedDict(TypedDict):
 
 class Files(BaseModel):
     file_name: Annotated[
-        str, pydantic.Field(alias="files"), FieldMetadata(multipart=True)
+        str, pydantic.Field(alias="fileName"), FieldMetadata(multipart=True)
     ]
 
     content: Annotated[
@@ -33,9 +33,9 @@ class Files(BaseModel):
     ] = None
 
 
-class BodyAddFilesGraphGraphNameFilesPostTypedDict(TypedDict):
+class BodyPostInsertFilesGraphGraphNameFilesPostTypedDict(TypedDict):
     files: List[FilesTypedDict]
 
 
-class BodyAddFilesGraphGraphNameFilesPost(BaseModel):
+class BodyPostInsertFilesGraphGraphNameFilesPost(BaseModel):
     files: Annotated[List[Files], FieldMetadata(multipart=True)]

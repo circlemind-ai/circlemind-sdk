@@ -1,4 +1,4 @@
-# GetGraphConfigurationGraphGraphNameConfigurationGetRequest
+# GetGraphmlGraphGraphNameGraphmlGetRequest
 
 
 ## Fields

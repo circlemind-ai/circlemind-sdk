@@ -1,8 +1,10 @@
-# GetGraphListGraphGetRequest
+# GraphListResponse
+
+Data model for graph list response.
 
 
 ## Fields
 
 | Field                   | Type                    | Required                | Description             |
 | ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `graph_name`            | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |
+| `graphs`                | List[*str*]             | :heavy_check_mark:      | List of existing graphs |

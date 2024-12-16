@@ -1,5 +1,7 @@
 # ConfigureRequest
 
+Data model for graph configuration request.
+
 
 ## Fields
 

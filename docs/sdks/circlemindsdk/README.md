@@ -4,19 +4,59 @@
 
 ### Available Operations
 
-* [get_graph_configuration](#get_graph_configuration) - Get Graph Configuration
-* [create_graph_configuration](#create_graph_configuration) - Post Graph Configuration
-* [get_graph_list](#get_graph_list) - Get Graph List
-* [create_graph](#create_graph) - Create Graph
-* [create_query](#create_query) - Post Query
-* [get_query_handler](#get_query_handler) - Get Query Handler
-* [create_insert](#create_insert) - Post Insert
-* [create_graph_files](#create_graph_files) - Add Files
-* [get_insert_handler](#get_insert_handler) - Get Insert Handler
+* [get_user_plan_plan_get](#get_user_plan_plan_get) - User plan
+* [get_graph_configuration](#get_graph_configuration) - Graph configuration (get)
+* [set_graph_configuration](#set_graph_configuration) - Graph configuration (set)
+* [list_graphs](#list_graphs) - List graphs
+* [create_graph](#create_graph) - Create new graph
+* [delete_graph](#delete_graph) - Delete existing graph
+* [download_graphml](#download_graphml) - Download graphml
+* [query](#query) - Query memory
+* [get_query_status](#get_query_status) - Check query request status
+* [add](#add) - Add memory
+* [add_from_files](#add_from_files) - Add memory (from files)
+* [get_add_status](#get_add_status) - Check add request status
+
+## get_user_plan_plan_get
+
+Return the active plan for the current user and its usage metrics.
+
+### Example Usage
+
+```python
+from circlemind_sdk import CirclemindSDK
+import os
+
+with CirclemindSDK(
+    api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
+) as circlemind_sdk:
+
+    res = circlemind_sdk.get_user_plan_plan_get()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.PlanResponse](../../models/planresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
 
 ## get_graph_configuration
 
-Get Graph Configuration
+Retrieve the configuration details of a specific graph by its name.
 
 ### Example Usage
 
@@ -24,15 +64,14 @@ Get Graph Configuration
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_configuration(graph_name="<value>")
+    res = circlemind_sdk.get_graph_configuration(graph_name="<value>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -40,7 +79,7 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *Nullable[str]*                                                     | :heavy_check_mark:                                                  | N/A                                                                 |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -54,9 +93,9 @@ if res is not None:
 | models.HTTPValidationError | 422                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## create_graph_configuration
+## set_graph_configuration
 
-Post Graph Configuration
+Update the configuration details of a specific graph by its name.
 
 ### Example Usage
 
@@ -64,21 +103,20 @@ Post Graph Configuration
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.create_graph_configuration(graph_name="<value>", configure_request={
-    "domain": "agitated-cod.name",
-    "example_queries": "<value>",
-    "entity_types": [
-        "<value>",
-    ],
-})
+    res = circlemind_sdk.set_graph_configuration(graph_name="<value>", configure_request={
+        "domain": "agitated-cod.name",
+        "example_queries": "<value>",
+        "entity_types": [
+            "<value>",
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -86,7 +124,7 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *Nullable[str]*                                                     | :heavy_check_mark:                                                  | N/A                                                                 |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `configure_request`                                                 | [models.ConfigureRequest](../../models/configurerequest.md)         | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
@@ -101,9 +139,9 @@ if res is not None:
 | models.HTTPValidationError | 422                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_graph_list
+## list_graphs
 
-Get Graph List
+Return the list of all existing graphs for the current user.
 
 ### Example Usage
 
@@ -111,15 +149,14 @@ Get Graph List
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_graph_list()
+    res = circlemind_sdk.list_graphs()
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -127,23 +164,21 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[Any](../../models/.md)**
+**[models.GraphListResponse](../../models/graphlistresponse.md)**
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.HTTPValidationError | 422                        | application/json           |
-| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
 
 ## create_graph
 
-Create Graph
+Create a new graph
 
 ### Example Usage
 
@@ -151,23 +186,22 @@ Create Graph
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.create_graph(graph_name="<value>", configure_request={
-    "domain": "liquid-godfather.org",
-    "example_queries": "<value>",
-    "entity_types": [
-        "<value>",
-        "<value>",
-        "<value>",
-    ],
-})
+    res = circlemind_sdk.create_graph(graph_name="<value>", configure_request={
+        "domain": "liquid-godfather.org",
+        "example_queries": "<value>",
+        "entity_types": [
+            "<value>",
+            "<value>",
+            "<value>",
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -175,8 +209,47 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *Nullable[str]*                                                     | :heavy_check_mark:                                                  | N/A                                                                 |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `configure_request`                                                 | [models.ConfigureRequest](../../models/configurerequest.md)         | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.ConfigureResponse](../../models/configureresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## delete_graph
+
+Delete the selected graph.
+
+### Example Usage
+
+```python
+from circlemind_sdk import CirclemindSDK
+import os
+
+with CirclemindSDK(
+    api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
+) as circlemind_sdk:
+
+    res = circlemind_sdk.delete_graph(graph_name="<value>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -190,9 +263,9 @@ if res is not None:
 | models.HTTPValidationError | 422                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## create_query
+## download_graphml
 
-Post Query
+Generate a download URL for the graph in graphml format.
 
 ### Example Usage
 
@@ -200,17 +273,14 @@ Post Query
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.create_query(graph_name="<value>", query_request={
-    "query": "<value>",
-})
+    res = circlemind_sdk.download_graphml(graph_name="<value>")
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -218,7 +288,48 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *Nullable[str]*                                                     | :heavy_check_mark:                                                  | N/A                                                                 |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DownloadGraphResponse](../../models/downloadgraphresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## query
+
+Send a query request to the graph.
+
+### Example Usage
+
+```python
+from circlemind_sdk import CirclemindSDK
+import os
+
+with CirclemindSDK(
+    api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
+) as circlemind_sdk:
+
+    res = circlemind_sdk.query(graph_name="<value>", query_request={
+        "query": "<value>",
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `query_request`                                                     | [models.QueryRequest](../../models/queryrequest.md)                 | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
@@ -233,9 +344,9 @@ if res is not None:
 | models.HTTPValidationError | 422                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_query_handler
+## get_query_status
 
-Get Query Handler
+Return the status of an existing query request.
 
 ### Example Usage
 
@@ -243,15 +354,14 @@ Get Query Handler
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_query_handler(graph_name="<value>", request_id="<id>", request_time=362783)
+    res = circlemind_sdk.get_query_status(graph_name="<value>", request_id="<id>", request_time=816039)
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -259,7 +369,7 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *Nullable[str]*                                                     | :heavy_check_mark:                                                  | N/A                                                                 |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `request_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `request_time`                                                      | *int*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
@@ -275,9 +385,9 @@ if res is not None:
 | models.HTTPValidationError | 422                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## create_insert
+## add
 
-Post Insert
+Create a new memory in the graph using raw text.
 
 ### Example Usage
 
@@ -285,17 +395,16 @@ Post Insert
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.create_insert(graph_name="<value>", memory_request={
-    "memory": "<value>",
-})
+    res = circlemind_sdk.add(graph_name="<value>", insert_request={
+        "memory": "<value>",
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -303,8 +412,8 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *Nullable[str]*                                                     | :heavy_check_mark:                                                  | N/A                                                                 |
-| `memory_request`                                                    | [models.MemoryRequest](../../models/memoryrequest.md)               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `insert_request`                                                    | [models.InsertRequest](../../models/insertrequest.md)               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -318,9 +427,9 @@ if res is not None:
 | models.HTTPValidationError | 422                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## create_graph_files
+## add_from_files
 
-Add Files
+Create a new memory in the graph from files.
 
 ### Example Usage
 
@@ -328,36 +437,39 @@ Add Files
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.create_graph_files(graph_name="<value>", body_add_files_graph_graph_name_files_post={
-    "files": [
-        {
-            "file_name": "example.file",
-            "content": open("example.file", "rb"),
-        },
-    ],
-})
+    res = circlemind_sdk.add_from_files(graph_name="<value>", body_post_insert_files_graph_graph_name_files_post={
+        "files": [
+            {
+                "file_name": "example.file",
+                "content": open("example.file", "rb"),
+            },
+            {
+                "file_name": "example.file",
+                "content": open("example.file", "rb"),
+            },
+        ],
+    })
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `graph_name`                                                                                      | *Nullable[str]*                                                                                   | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `body_add_files_graph_graph_name_files_post`                                                      | [models.BodyAddFilesGraphGraphNameFilesPost](../../models/bodyaddfilesgraphgraphnamefilespost.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |
+| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `graph_name`                                                                                                    | *str*                                                                                                           | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `body_post_insert_files_graph_graph_name_files_post`                                                            | [models.BodyPostInsertFilesGraphGraphNameFilesPost](../../models/bodypostinsertfilesgraphgraphnamefilespost.md) | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `retries`                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                | :heavy_minus_sign:                                                                                              | Configuration to override the default retry behavior of the client.                                             |
 
 ### Response
 
-**[Any](../../models/.md)**
+**[models.InsertResponse](../../models/insertresponse.md)**
 
 ### Errors
 
@@ -366,9 +478,9 @@ if res is not None:
 | models.HTTPValidationError | 422                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_insert_handler
+## get_add_status
 
-Get Insert Handler
+Return the status of an existing add request.
 
 ### Example Usage
 
@@ -376,15 +488,14 @@ Get Insert Handler
 from circlemind_sdk import CirclemindSDK
 import os
 
-s = CirclemindSDK(
+with CirclemindSDK(
     api_key_header=os.getenv("CIRCLEMINDSDK_API_KEY_HEADER", ""),
-)
+) as circlemind_sdk:
 
-res = s.get_insert_handler(graph_name="<value>", request_id="<id>", request_time=895985)
+    res = circlemind_sdk.get_add_status(graph_name="<value>", request_id="<id>", request_time=877284)
 
-if res is not None:
-    # handle response
-    pass
+    # Handle response
+    print(res)
 
 ```
 
@@ -392,7 +503,7 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `graph_name`                                                        | *Nullable[str]*                                                     | :heavy_check_mark:                                                  | N/A                                                                 |
+| `graph_name`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `request_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `request_time`                                                      | *int*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |

@@ -13,25 +13,41 @@ from pydantic import model_serializer
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class MemoryRequestTypedDict(TypedDict):
+class InsertRequestTypedDict(TypedDict):
+    r"""Data model for insert request."""
+
     memory: str
-    memory_id: NotRequired[Nullable[str]]
+    r"""Raw text to be inserted into the graph"""
     metadata: NotRequired[Nullable[str]]
+    r"""Stringified JSON dictionary containing any metadata to link to the given memory.
+
+    (i.e., `'{\"id\": \"asdash-234fdsc-erwer-wqes2\", \"url\": \"https://example.com\"}'`)
+    """
+    memory_id: NotRequired[Nullable[str]]
+    r"""Reserved"""
 
 
-class MemoryRequest(BaseModel):
+class InsertRequest(BaseModel):
+    r"""Data model for insert request."""
+
     memory: str
+    r"""Raw text to be inserted into the graph"""
+
+    metadata: OptionalNullable[str] = UNSET
+    r"""Stringified JSON dictionary containing any metadata to link to the given memory.
+
+    (i.e., `'{\"id\": \"asdash-234fdsc-erwer-wqes2\", \"url\": \"https://example.com\"}'`)
+    """
 
     memory_id: Annotated[OptionalNullable[str], pydantic.Field(alias="memoryId")] = (
         UNSET
     )
-
-    metadata: OptionalNullable[str] = UNSET
+    r"""Reserved"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["memoryId", "metadata"]
-        nullable_fields = ["memoryId", "metadata"]
+        optional_fields = ["metadata", "memoryId"]
+        nullable_fields = ["metadata", "memoryId"]
         null_default_fields = []
 
         serialized = handler(self)

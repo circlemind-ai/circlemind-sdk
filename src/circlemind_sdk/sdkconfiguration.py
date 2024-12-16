@@ -25,10 +25,10 @@ class SDKConfiguration:
     server_url: Optional[str] = ""
     server_idx: Optional[int] = 0
     language: str = "python"
-    openapi_doc_version: str = "0.3.0"
-    sdk_version: str = "0.1.0"
-    gen_version: str = "2.460.1"
-    user_agent: str = "speakeasy-sdk/python 0.1.0 2.460.1 0.3.0 circlemind-sdk"
+    openapi_doc_version: str = "0.0.4"
+    sdk_version: str = "0.1.0-post0"
+    gen_version: str = "2.479.7"
+    user_agent: str = "speakeasy-sdk/python 0.1.0-post0 2.479.7 0.0.4 circlemind-sdk"
     retry_config: OptionalNullable[RetryConfig] = Field(default_factory=lambda: UNSET)
     timeout_ms: Optional[int] = None
 

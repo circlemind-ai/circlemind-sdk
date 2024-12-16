@@ -15,5 +15,5 @@ targets:
                 token: $pypi_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas-code-samples
+                location: registry.speakeasyapi.dev/circlemind/circlemind/circlemind-sdk-oas-python-code-samples
             blocking: false
